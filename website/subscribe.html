@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscribe — VFS Alert PK</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0070BA;
+      --primary-dark: #005a94;
+      --accent: #01A550;
+      --accent-dark: #018a42;
+      --bg: #ffffff;
+      --surface: #f8fafc;
+      --border: #e2e8f0;
+      --text: #1a202c;
+      --text-muted: #64748b;
+      --error: #ef4444;
+      --shadow: 0 4px 24px rgba(0,112,186,0.10);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--surface);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 16px;
+    }
+    .navbar-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      height: 56px;
+      gap: 16px;
+    }
+    .logo { font-weight: 700; font-size: 1.1rem; color: var(--primary); }
+    .back-link { color: var(--text-muted); font-size: 0.9rem; }
+
+    .page-wrap {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 32px 16px 64px;
+    }
+
+    .page-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .page-sub { color: var(--text-muted); margin-bottom: 28px; }
+
+    .card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 24px;
+      margin-bottom: 20px;
+    }
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .form-group { margin-bottom: 18px; }
+    label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .required::after { content: ' *'; color: var(--error); }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+      background: var(--bg);
+      color: var(--text);
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    input.invalid { border-color: var(--error); }
+
+    .hint { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+
+    /* ── Plan radios ── */
+    .plan-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    @media (max-width: 480px) { .plan-options { grid-template-columns: 1fr; } }
+    .plan-option {
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 12px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+    }
+    .plan-option input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .plan-option.selected {
+      border-color: var(--primary);
+      background: #f0f7ff;
+    }
+    .plan-option-name { font-weight: 700; font-size: 0.9rem; margin-bottom: 2px; }
+    .plan-option-price { font-size: 1rem; font-weight: 700; color: var(--primary); }
+    .plan-option-desc { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
+
+    /* ── Checkboxes ── */
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 8px;
+    }
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      font-size: 0.9rem;
+    }
+    .checkbox-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--primary); flex-shrink: 0; }
+    .checkbox-item:has(input:checked) {
+      border-color: var(--primary);
+      background: #f0f7ff;
+    }
+
+    /* ── Duration ── */
+    .duration-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    @media (max-width: 480px) { .duration-options { grid-template-columns: 1fr; } }
+    .duration-option {
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 10px;
+      cursor: pointer;
+      text-align: center;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+    }
+    .duration-option input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .duration-option.selected { border-color: var(--primary); background: #f0f7ff; }
+    .duration-months { font-weight: 700; font-size: 0.9rem; }
+    .duration-price { font-size: 1rem; font-weight: 700; color: var(--primary); margin-top: 2px; }
+    .duration-saving { font-size: 0.7rem; color: var(--accent); margin-top: 2px; }
+
+    /* ── Payment section ── */
+    .payment-section {
+      display: none;
+      margin-top: 0;
+    }
+    .payment-section.visible { display: block; }
+
+    .jazzcash-box {
+      background: linear-gradient(135deg, #e8f4fd, #dbeafe);
+      border: 1.5px solid var(--primary);
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .jazzcash-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; }
+    .jazzcash-amount { font-size: 1.8rem; font-weight: 700; color: var(--primary); }
+    .jazzcash-number {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 8px;
+      letter-spacing: 1px;
+    }
+    .jazzcash-instruction { font-size: 0.85rem; color: var(--text-muted); margin-top: 6px; }
+
+    /* ── Submit ── */
+    .submit-btn {
+      width: 100%;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, opacity 0.2s;
+      font-family: inherit;
+    }
+    .submit-btn:hover { background: var(--accent-dark); }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .error-banner {
+      background: #fef2f2;
+      border: 1.5px solid #fca5a5;
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--error);
+      font-size: 0.9rem;
+      margin-top: 14px;
+      display: none;
+    }
+    .error-banner.visible { display: block; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <div class="logo">🇵🇰 VFS Alert PK</div>
+    <a href="index.html" class="back-link">← Back</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <h1 class="page-title">Subscribe to VFS Alerts</h1>
+  <p class="page-sub">Fill in the form below to start receiving instant WhatsApp alerts.</p>
+
+  <form id="subscribeForm" novalidate>
+
+    <!-- Personal Info -->
+    <div class="card">
+      <div class="card-title">📋 Your Information</div>
+
+      <div class="form-group">
+        <label class="required" for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="e.g. Ahmed Khan" required>
+      </div>
+
+      <div class="form-group">
+        <label class="required" for="whatsapp">WhatsApp Number</label>
+        <input type="tel" id="whatsapp" name="whatsapp" placeholder="e.g. 0300-1234567" required>
+        <div class="hint">Pakistani number format. This is where you'll receive alerts.</div>
+      </div>
+    </div>
+
+    <!-- Plan Selection -->
+    <div class="card">
+      <div class="card-title">💎 Choose Your Plan</div>
+      <div class="plan-options">
+        <label class="plan-option" id="planFree">
+          <input type="radio" name="plan" value="free">
+          <div class="plan-option-name">FREE Trial</div>
+          <div class="plan-option-price">Rs. 0</div>
+          <div class="plan-option-desc">UK only, 15-min alerts, 7 days</div>
+        </label>
+        <label class="plan-option selected" id="planPro">
+          <input type="radio" name="plan" value="pro" checked>
+          <div class="plan-option-name">PRO</div>
+          <div class="plan-option-price">Rs. 1,500/mo</div>
+          <div class="plan-option-desc">All routes, 1-min alerts</div>
+        </label>
+        <label class="plan-option" id="planVip">
+          <input type="radio" name="plan" value="vip">
+          <div class="plan-option-name">VIP</div>
+          <div class="plan-option-price">Rs. 3,000/mo</div>
+          <div class="plan-option-desc">30-sec alerts + WhatsApp support</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Routes -->
+    <div class="card">
+      <div class="card-title">🛂 Visa Routes (select all that apply)</div>
+      <div class="checkbox-grid" id="routesContainer">
+        <label class="checkbox-item">
+          <input type="checkbox" name="routes" value="pak-gbr"> Pakistan → UK
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" name="routes" value="pak-ita"> Pakistan → Italy (Schengen)
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" name="routes" value="pak-fra"> Pakistan → France (Schengen)
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" name="routes" value="pak-deu"> Pakistan → Germany (Schengen)
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" name="routes" value="pak-can"> Pakistan → Canada
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" name="routes" value="pak-aus"> Pakistan → Australia
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" name="routes" value="pak-nld"> Pakistan → Netherlands (Schengen)
+        </label>
+      </div>
+    </div>
+
+    <!-- Cities -->
+    <div class="card">
+      <div class="card-title">🏙 VFS Centre Cities</div>
+      <div class="checkbox-grid">
+        <label class="checkbox-item">
+          <input type="checkbox" name="cities" value="lahore"> Lahore
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" name="cities" value="islamabad"> Islamabad
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" name="cities" value="karachi"> Karachi
+        </label>
+      </div>
+    </div>
+
+    <!-- Duration -->
+    <div class="card" id="durationCard">
+      <div class="card-title">📅 Subscription Duration</div>
+      <div class="duration-options">
+        <label class="duration-option selected" id="dur1">
+          <input type="radio" name="months" value="1" checked>
+          <div class="duration-months">1 Month</div>
+          <div class="duration-price" id="price1">Rs. 1,500</div>
+        </label>
+        <label class="duration-option" id="dur3">
+          <input type="radio" name="months" value="3">
+          <div class="duration-months">3 Months</div>
+          <div class="duration-price" id="price3">Rs. 4,000</div>
+          <div class="duration-saving">Save Rs. 500</div>
+        </label>
+        <label class="duration-option" id="dur6">
+          <input type="radio" name="months" value="6">
+          <div class="duration-months">6 Months</div>
+          <div class="duration-price" id="price6">Rs. 7,500</div>
+          <div class="duration-saving">Save Rs. 1,500</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Payment -->
+    <div class="card payment-section" id="paymentSection">
+      <div class="card-title">💳 Payment Details</div>
+
+      <div class="jazzcash-box">
+        <div class="jazzcash-title">Send Payment via JazzCash</div>
+        <div class="jazzcash-amount" id="paymentAmount">Rs. 1,500</div>
+        <div class="jazzcash-number">0331-862-7018</div>
+        <div class="jazzcash-instruction">Send to this JazzCash number, then enter your transaction ID below</div>
+      </div>
+
+      <div class="form-group">
+        <label class="required" for="jazzcash_ref">JazzCash Transaction ID</label>
+        <input type="text" id="jazzcash_ref" name="jazzcash_ref" placeholder="e.g. T20261002123456">
+        <div class="hint">Find this in your JazzCash app under transaction history.</div>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn" id="submitBtn">Submit &amp; Activate Trial</button>
+    <div class="error-banner" id="errorBanner"></div>
+
+  </form>
+</div>
+
+<script>
+  const WORKER_URL = 'https://vfs-alert-pk.YOUR_SUBDOMAIN.workers.dev';
+
+  const PLAN_PRICES = {
+    free: { 1: 0, 3: 0, 6: 0 },
+    pro:  { 1: 1500, 3: 4000, 6: 7500 },
+    vip:  { 1: 3000, 3: 8000, 6: 15000 },
+  };
+
+  const PLAN_3MO = { free: 0, pro: 4000, vip: 8000 };
+  const PLAN_6MO = { free: 0, pro: 7500, vip: 15000 };
+
+  let selectedPlan = 'pro';
+  let selectedMonths = 1;
+
+  function updateUI() {
+    // Plan options styling
+    document.querySelectorAll('.plan-option').forEach(el => el.classList.remove('selected'));
+    const planEl = document.getElementById('plan' + selectedPlan.charAt(0).toUpperCase() + selectedPlan.slice(1));
+    if (planEl) planEl.classList.add('selected');
+
+    // Duration prices
+    const prices = PLAN_PRICES[selectedPlan] || PLAN_PRICES.pro;
+    document.getElementById('price1').textContent = `Rs. ${prices[1].toLocaleString()}`;
+    document.getElementById('price3').textContent = `Rs. ${prices[3].toLocaleString()}`;
+    document.getElementById('price6').textContent = `Rs. ${prices[6].toLocaleString()}`;
+
+    // Duration options styling
+    document.querySelectorAll('.duration-option').forEach(el => el.classList.remove('selected'));
+    document.getElementById('dur' + selectedMonths).classList.add('selected');
+
+    // Show/hide duration & payment section
+    const durationCard = document.getElementById('durationCard');
+    const paymentSection = document.getElementById('paymentSection');
+    const submitBtn = document.getElementById('submitBtn');
+
+    if (selectedPlan === 'free') {
+      durationCard.style.display = 'none';
+      paymentSection.classList.remove('visible');
+      submitBtn.textContent = 'Submit & Activate Trial';
+    } else {
+      durationCard.style.display = 'block';
+      paymentSection.classList.add('visible');
+      const amount = prices[selectedMonths];
+      document.getElementById('paymentAmount').textContent = `Rs. ${amount.toLocaleString()}`;
+      submitBtn.textContent = 'Submit Payment';
+    }
+  }
+
+  // Plan selection
+  document.querySelectorAll('input[name="plan"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      selectedPlan = radio.value;
+      updateUI();
+    });
+  });
+  document.querySelectorAll('.plan-option').forEach(el => {
+    el.addEventListener('click', () => {
+      const radio = el.querySelector('input[type="radio"]');
+      if (radio) { radio.checked = true; selectedPlan = radio.value; updateUI(); }
+    });
+  });
+
+  // Duration selection
+  document.querySelectorAll('input[name="months"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      selectedMonths = parseInt(radio.value);
+      updateUI();
+    });
+  });
+  document.querySelectorAll('.duration-option').forEach(el => {
+    el.addEventListener('click', () => {
+      const radio = el.querySelector('input[type="radio"]');
+      if (radio) { radio.checked = true; selectedMonths = parseInt(radio.value); updateUI(); }
+    });
+  });
+
+  // Pre-select plan from URL param
+  const urlParams = new URLSearchParams(location.search);
+  const preplan = urlParams.get('plan');
+  if (preplan && ['free','pro','vip'].includes(preplan)) {
+    selectedPlan = preplan;
+    const radio = document.querySelector(`input[name="plan"][value="${preplan}"]`);
+    if (radio) radio.checked = true;
+  }
+  updateUI();
+
+  // Pakistani phone validation
+  function isValidPK(num) {
+    const digits = num.replace(/\D/g, '');
+    return /^(0?3\d{9}|923\d{9})$/.test(digits);
+  }
+
+  // Form submit
+  document.getElementById('subscribeForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const whatsapp = document.getElementById('whatsapp').value.trim();
+    const plan = document.querySelector('input[name="plan"]:checked')?.value;
+    const months = parseInt(document.querySelector('input[name="months"]:checked')?.value || '1');
+    const routes = [...document.querySelectorAll('input[name="routes"]:checked')].map(el => el.value);
+    const cities = [...document.querySelectorAll('input[name="cities"]:checked')].map(el => el.value);
+    const jazzcash_ref = document.getElementById('jazzcash_ref').value.trim();
+
+    const errorBanner = document.getElementById('errorBanner');
+    errorBanner.classList.remove('visible');
+
+    // Validation
+    if (!name) return showError('Please enter your full name.');
+    if (!whatsapp || !isValidPK(whatsapp)) return showError('Please enter a valid Pakistani WhatsApp number (e.g. 0300-1234567).');
+    if (routes.length === 0) return showError('Please select at least one visa route.');
+    if (cities.length === 0) return showError('Please select at least one city.');
+    if (plan !== 'free' && !jazzcash_ref) return showError('Please enter your JazzCash transaction ID.');
+
+    // Free plan: only 1 route allowed
+    if (plan === 'free' && routes.length > 1) return showError('Free plan allows only 1 route. Please select only one route.');
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    try {
+      const res = await fetch(`${WORKER_URL}/api/subscribe`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, whatsapp, plan, routes, cities, jazzcash_ref, months }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        window.location.href = 'success.html?name=' + encodeURIComponent(name);
+      } else {
+        showError(data.message || 'Something went wrong. Please try again.');
+        btn.disabled = false;
+        btn.textContent = plan === 'free' ? 'Submit & Activate Trial' : 'Submit Payment';
+      }
+    } catch (err) {
+      showError('Network error. Please check your connection and try again.');
+      btn.disabled = false;
+      btn.textContent = plan === 'free' ? 'Submit & Activate Trial' : 'Submit Payment';
+    }
+
+    function showError(msg) {
+      errorBanner.textContent = msg;
+      errorBanner.classList.add('visible');
+      errorBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+</script>
+</body>
+</html>

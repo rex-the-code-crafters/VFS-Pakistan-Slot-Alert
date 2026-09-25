@@ -1,0 +1,13 @@
+/* Global shared styles — imported by pages that need them */
+:root {
+  --primary: #0070BA;
+  --primary-dark: #005a94;
+  --accent: #01A550;
+  --accent-dark: #018a42;
+  --bg: #ffffff;
+  --surface: #f8fafc;
+  --border: #e2e8f0;
+  --text: #1a202c;
+  --text-muted: #64748b;
+  --shadow: 0 4px 24px rgba(0, 112, 186, 0.10);
+}

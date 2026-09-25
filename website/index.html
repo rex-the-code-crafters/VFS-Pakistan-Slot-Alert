@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VFS Alert PK — Never Miss a Visa Slot</title>
+  <meta name="description" content="Get instant WhatsApp alerts the moment UK, Schengen, or Canada visa slots open at VFS Pakistan in Lahore, Islamabad & Karachi.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0070BA;
+      --primary-dark: #005a94;
+      --accent: #01A550;
+      --accent-dark: #018a42;
+      --bg: #ffffff;
+      --surface: #f8fafc;
+      --border: #e2e8f0;
+      --text: #1a202c;
+      --text-muted: #64748b;
+      --shadow: 0 4px 24px rgba(0,112,186,0.10);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Navbar ── */
+    .navbar {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .logo { font-weight: 700; font-size: 1.2rem; color: var(--primary); }
+    .nav-cta {
+      background: var(--accent);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--accent-dark); text-decoration: none; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #0070BA 0%, #005a94 60%, #003d6b 100%);
+      color: #fff;
+      padding: 64px 16px 72px;
+      text-align: center;
+    }
+    .hero-flag { font-size: 2rem; margin-bottom: 8px; }
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .hero-urdu {
+      font-family: 'Noto Nastaliq Urdu', serif;
+      font-size: 1.3rem;
+      direction: rtl;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.88);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 16px 36px;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      box-shadow: 0 4px 20px rgba(1,165,80,0.4);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .hero-cta:hover { background: var(--accent-dark); transform: translateY(-2px); text-decoration: none; }
+    .hero-cta:active { transform: translateY(0); }
+
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .badge {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.875rem;
+      color: #fff;
+    }
+
+    /* ── Section wrapper ── */
+    .section { padding: 60px 16px; }
+    .section-alt { background: var(--surface); }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+
+    /* ── How it works ── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+    .step {
+      text-align: center;
+      padding: 28px 20px;
+      background: var(--bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .step-num {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-size: 1.3rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .step h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .step p { font-size: 0.9rem; color: var(--text-muted); }
+
+    /* ── Plans ── */
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .plan-card {
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 24px;
+      position: relative;
+      background: var(--bg);
+      transition: box-shadow 0.2s;
+    }
+    .plan-card:hover { box-shadow: var(--shadow); }
+    .plan-card.featured {
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+    .plan-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+    .plan-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+    .plan-price { font-size: 1.8rem; font-weight: 700; color: var(--primary); margin-bottom: 16px; }
+    .plan-price span { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
+    .plan-features { list-style: none; margin-bottom: 24px; }
+    .plan-features li {
+      padding: 5px 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .plan-features li::before { content: '✓'; color: var(--accent); font-weight: 700; }
+    .plan-cta {
+      display: block;
+      text-align: center;
+      background: var(--primary);
+      color: #fff;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .plan-cta:hover { background: var(--primary-dark); text-decoration: none; }
+    .plan-cta.secondary {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+    .plan-cta.secondary:hover { background: var(--primary); color: #fff; }
+
+    /* ── Status dashboard ── */
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .status-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #94a3b8;
+      flex-shrink: 0;
+    }
+    .status-dot.available { background: var(--accent); box-shadow: 0 0 8px rgba(1,165,80,0.5); }
+    .status-dot.unavailable { background: #ef4444; }
+    .status-route { font-size: 0.9rem; font-weight: 600; }
+    .status-label { font-size: 0.75rem; color: var(--text-muted); }
+
+    /* ── FAQ ── */
+    .faq-list { max-width: 700px; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+    .faq-q { font-weight: 600; margin-bottom: 8px; }
+    .faq-a { color: var(--text-muted); font-size: 0.95rem; }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 24px 16px;
+      font-size: 0.85rem;
+    }
+    footer strong { color: #fff; }
+
+    @media (max-width: 480px) {
+      .hero { padding: 48px 16px 56px; }
+      .hero-cta { display: block; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <div class="logo">🇵🇰 VFS Alert PK</div>
+    <a href="subscribe.html" class="nav-cta">Subscribe Now</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-flag">🇵🇰</div>
+  <h1>VFS Visa Slot Alerts 🚨<br>Never Miss a Slot Again</h1>
+  <span class="hero-urdu">پاکستان سے ویزہ — فوری وٹس ایپ الرٹ</span>
+  <p>Get instant WhatsApp alerts the moment UK, Schengen, or Canada visa slots open in Lahore, Islamabad &amp; Karachi</p>
+  <a href="subscribe.html" class="hero-cta">Subscribe Now — Rs. 1,500/month</a>
+  <div class="trust-badges">
+    <span class="badge">✅ WhatsApp alerts</span>
+    <span class="badge">✅ All VFS centres</span>
+    <span class="badge">✅ 60-second monitoring</span>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-sub">Three simple steps to never miss a VFS slot again</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Choose Your Route &amp; City</h3>
+        <p>Select your visa destination (UK, Italy, Canada, etc.) and your VFS centre city</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Pay via JazzCash</h3>
+        <p>Send your subscription fee to our JazzCash number and submit your transaction ID</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Get Instant Alerts 24/7</h3>
+        <p>The moment a slot opens, you receive a WhatsApp message instantly — day or night</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Plans -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Simple, Transparent Pricing</h2>
+    <p class="section-sub">Choose the plan that fits your needs</p>
+    <div class="plans">
+
+      <div class="plan-card">
+        <div class="plan-name">FREE Trial</div>
+        <div class="plan-price">Rs. 0 <span>/7 days</span></div>
+        <ul class="plan-features">
+          <li>UK route only</li>
+          <li>1 city</li>
+          <li>15-minute monitoring</li>
+          <li>7-day trial</li>
+        </ul>
+        <a href="subscribe.html?plan=free" class="plan-cta secondary">Start Free Trial</a>
+      </div>
+
+      <div class="plan-card featured">
+        <div class="plan-badge">Most Popular</div>
+        <div class="plan-name">PRO Alert</div>
+        <div class="plan-price">Rs. 1,500 <span>/month</span></div>
+        <ul class="plan-features">
+          <li>All 7 routes</li>
+          <li>All 3 cities</li>
+          <li>1-minute monitoring</li>
+          <li>Instant WhatsApp alerts</li>
+          <li>3-month discount available</li>
+        </ul>
+        <a href="subscribe.html?plan=pro" class="plan-cta">Subscribe — PRO</a>
+      </div>
+
+      <div class="plan-card">
+        <div class="plan-name">VIP Auto-Alert</div>
+        <div class="plan-price">Rs. 3,000 <span>/month</span></div>
+        <ul class="plan-features">
+          <li>All 7 routes</li>
+          <li>All 3 cities</li>
+          <li>30-second monitoring</li>
+          <li>Priority alerts</li>
+          <li>WhatsApp support</li>
+        </ul>
+        <a href="subscribe.html?plan=vip" class="plan-cta">Subscribe — VIP</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Live Status -->
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-title">Live Slot Status</h2>
+    <p class="section-sub">Real-time monitoring — updated every minute</p>
+    <div class="status-grid" id="statusGrid">
+      <div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:24px;">Loading live status…</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q">How do I pay?</div>
+        <div class="faq-a">Send payment to JazzCash <strong>0331-862-7018</strong> and submit the reference number in our subscription form.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">When will I be activated?</div>
+        <div class="faq-a">Within 2 hours of payment verification. You'll receive a WhatsApp confirmation once your subscription is active.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What if I miss an alert?</div>
+        <div class="faq-a">You receive every new slot alert for your routes instantly on WhatsApp. Slots reopen periodically, so stay ready.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Which countries does VFS Alert PK cover?</div>
+        <div class="faq-a">UK, Italy, France, Germany, Canada, Australia, and Netherlands — all countries processed through VFS Global Pakistan.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How fast is the alert?</div>
+        <div class="faq-a">Pro alerts arrive within 1 minute of a slot opening. VIP alerts within 30 seconds. Slots usually disappear in 30–90 seconds, so speed matters!</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>VFS Alert PK</strong> — Not affiliated with VFS Global or any government body.<br>
+  Subscription service for slot monitoring only. &copy; 2026 VFS Alert PK
+</footer>
+
+<script>
+  const WORKER_URL = 'https://vfs-alert-pk.YOUR_SUBDOMAIN.workers.dev';
+
+  const ROUTE_LABELS = {
+    'slot:pak-gbr:lahore': 'Pakistan → UK (Lahore)',
+    'slot:pak-gbr:islamabad': 'Pakistan → UK (Islamabad)',
+    'slot:pak-gbr:karachi': 'Pakistan → UK (Karachi)',
+    'slot:pak-ita:lahore': 'Pakistan → Italy (Lahore)',
+    'slot:pak-fra:lahore': 'Pakistan → France (Lahore)',
+    'slot:pak-deu:lahore': 'Pakistan → Germany (Lahore)',
+    'slot:pak-can:lahore': 'Pakistan → Canada (Lahore)',
+    'slot:pak-aus:lahore': 'Pakistan → Australia (Lahore)',
+    'slot:pak-nld:lahore': 'Pakistan → Netherlands (Lahore)',
+  };
+
+  async function loadStatus() {
+    const grid = document.getElementById('statusGrid');
+    try {
+      const res = await fetch(`${WORKER_URL}/api/status`);
+      if (!res.ok) throw new Error('API error');
+      const data = await res.json();
+
+      const keys = Object.keys(data);
+      if (keys.length === 0) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:24px;">No status data yet — monitoring starts after deployment.</div>';
+        return;
+      }
+
+      grid.innerHTML = keys.map(key => {
+        const s = data[key];
+        const label = ROUTE_LABELS[key] || key.replace('slot:', '').replace(/:/g, ' — ');
+        const available = s.available;
+        return `
+          <div class="status-card">
+            <div class="status-dot ${available ? 'available' : 'unavailable'}"></div>
+            <div>
+              <div class="status-route">${label}</div>
+              <div class="status-label">${available ? '🟢 Slots Available' : '🔴 No Slots'}</div>
+            </div>
+          </div>`;
+      }).join('');
+    } catch {
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:24px;">Could not load live status. Please refresh.</div>';
+    }
+  }
+
+  loadStatus();
+  setInterval(loadStatus, 60_000);
+</script>
+</body>
+</html>

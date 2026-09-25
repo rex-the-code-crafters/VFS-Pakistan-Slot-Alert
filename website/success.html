@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscription Submitted — VFS Alert PK</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0070BA;
+      --accent: #01A550;
+      --bg: #ffffff;
+      --surface: #f8fafc;
+      --border: #e2e8f0;
+      --text: #1a202c;
+      --text-muted: #64748b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--surface);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+    .card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 32px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+    }
+    .icon { font-size: 3.5rem; margin-bottom: 16px; }
+    h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; }
+    .sub { color: var(--text-muted); margin-bottom: 28px; line-height: 1.6; }
+    .steps {
+      background: var(--surface);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: left;
+      margin-bottom: 28px;
+    }
+    .steps h3 { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+    .step { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 0.9rem; }
+    .step-num {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--primary); color: #fff;
+      font-size: 0.7rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .btn {
+      display: block;
+      background: var(--primary);
+      color: #fff;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-bottom: 12px;
+    }
+    .btn:hover { background: #005a94; }
+    .btn.secondary {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+    .btn.secondary:hover { background: var(--primary); color: #fff; }
+    .disclaimer { font-size: 0.75rem; color: var(--text-muted); margin-top: 20px; }
+  </style>
+</head>
+<body>
+<div class="card">
+  <div class="icon">✅</div>
+  <h1>Submission Received!</h1>
+  <p class="sub">Thank you, <strong id="nameDisplay">subscriber</strong>! Your subscription request has been submitted. We'll verify your payment and activate your account shortly.</p>
+
+  <div class="steps">
+    <h3>What happens next?</h3>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>We verify your JazzCash payment — usually within <strong>2 hours</strong></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>You receive a <strong>WhatsApp confirmation</strong> message once activated</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>Instant slot alerts start arriving on WhatsApp as soon as slots open</div>
+    </div>
+  </div>
+
+  <a href="index.html" class="btn">Back to Home</a>
+  <a href="subscribe.html" class="btn secondary">Subscribe Another Number</a>
+
+  <div class="disclaimer">
+    Having issues? Reply to your WhatsApp confirmation message or contact support.<br>
+    VFS Alert PK — not affiliated with VFS Global.
+  </div>
+</div>
+
+<script>
+  const params = new URLSearchParams(location.search);
+  const name = params.get('name');
+  if (name) document.getElementById('nameDisplay').textContent = name;
+</script>
+</body>
+</html>

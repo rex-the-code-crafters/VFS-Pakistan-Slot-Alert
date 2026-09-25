@@ -1,0 +1,26 @@
+name = "vfs-alert-pk"
+main = "worker/src/index.ts"
+compatibility_date = "2025-09-25"
+compatibility_flags = ["nodejs_compat"]
+
+# Browser Rendering for Playwright
+browser = { binding = "MYBROWSER" }
+
+# D1 Database
+[[d1_databases]]
+binding = "DB"
+database_name = "vfs-alert-db"
+database_id = "REPLACE_WITH_YOUR_D1_ID"  # Run: wrangler d1 create vfs-alert-db
+
+# KV Namespace for slot state
+[[kv_namespaces]]
+binding = "SLOT_STATE"
+id = "REPLACE_WITH_YOUR_KV_ID"  # Run: wrangler kv:namespace create SLOT_STATE
+
+# Cron: every 1 minute
+[triggers]
+crons = ["* * * * *"]
+
+# Environment variables (non-secret)
+[vars]
+ENVIRONMENT = "production"
