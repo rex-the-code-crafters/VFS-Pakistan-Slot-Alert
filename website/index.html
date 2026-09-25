@@ -2,480 +2,1035 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VFS Alert PK — Never Miss a Visa Slot</title>
-  <meta name="description" content="Get instant WhatsApp alerts the moment UK, Schengen, or Canada visa slots open at VFS Pakistan in Lahore, Islamabad & Karachi.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>VFS Alert PK — Instant Visa Slot Alerts</title>
+  <meta name="description" content="Never miss a VFS Pakistan visa appointment. Instant WhatsApp alerts for UK, Schengen & Canada slots in Lahore, Islamabad & Karachi.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Noto+Nastaliq+Urdu:wght@500&display=swap" rel="stylesheet">
   <style>
+    /* ── Tokens ─────────────────────────────────── */
     :root {
-      --primary: #0070BA;
-      --primary-dark: #005a94;
-      --accent: #01A550;
-      --accent-dark: #018a42;
-      --bg: #ffffff;
-      --surface: #f8fafc;
-      --border: #e2e8f0;
-      --text: #1a202c;
-      --text-muted: #64748b;
-      --shadow: 0 4px 24px rgba(0,112,186,0.10);
+      --green:     #00A855;
+      --green-hi:  #008A44;
+      --green-bg:  #E6F7EE;
+      --orange:    #F56A1A;
+      --orange-hi: #D9560E;
+      --orange-bg: #FFF0E8;
+      --ink:       #0A1628;
+      --ink2:      #3D5470;
+      --ink3:      #7A90A8;
+      --bg:        #F7FAF8;
+      --surface:   #FFFFFF;
+      --surface2:  #EEF4F1;
+      --border:    #D4DFDA;
+      --r: 12px; --r-lg: 20px; --r-xl: 28px;
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --green:#00D668;--green-hi:#00B858;--green-bg:rgba(0,214,104,.13);
+        --orange:#FF7A35;--orange-hi:#E86420;--orange-bg:rgba(255,122,53,.13);
+        --ink:#E4EDF4;--ink2:#8AACCC;--ink3:#4A6A88;
+        --bg:#070E1A;--surface:#0D1B2A;--surface2:#132235;--border:#1A2E44;
+        color-scheme:dark;
+      }
+    }
+    :root[data-theme="dark"] {
+      --green:#00D668;--green-hi:#00B858;--green-bg:rgba(0,214,104,.13);
+      --orange:#FF7A35;--orange-hi:#E86420;--orange-bg:rgba(255,122,53,.13);
+      --ink:#E4EDF4;--ink2:#8AACCC;--ink3:#4A6A88;
+      --bg:#070E1A;--surface:#0D1B2A;--surface2:#132235;--border:#1A2E44;
+      color-scheme:dark;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
+    /* ── Typography ─────────────────────────────── */
+    .display { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.6rem, 5.5vw, 4rem); line-height: 1.06; letter-spacing: -.03em; text-wrap: balance; }
+    .h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(1.55rem, 3.5vw, 2.2rem); letter-spacing: -.015em; text-wrap: balance; }
+    .h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; }
+    .label { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink3); }
 
-    a { color: var(--primary); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    /* ── Layout ─────────────────────────────────── */
+    .wrap { max-width: 1140px; margin: 0 auto; padding-inline: 24px; }
+    .sec { padding-block: 88px; }
+    .sec-head { text-align: center; margin-bottom: 56px; }
+    .sec-head .label { display: block; margin-bottom: 12px; }
+    .sec-head .h2 { margin-bottom: 12px; }
+    .sec-head p { color: var(--ink2); font-size: 1.05rem; max-width: 540px; margin-inline: auto; }
 
-    /* ── Navbar ── */
-    .navbar {
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
-      padding: 0 16px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    /* ── Logo ───────────────────────────────────── */
+    .logo-mark { display: flex; align-items: center; gap: 10px; }
+    .logo-word { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.15rem; line-height: 1; }
+    .logo-word span { color: var(--orange); }
+
+    /* ── Navbar ─────────────────────────────────── */
+    .nav {
+      position: sticky; top: env(safe-area-inset-top, 0); z-index: 200;
+      background: rgba(7,14,26,.85);
+      backdrop-filter: blur(20px) saturate(160%);
+      border-bottom: 1px solid rgba(255,255,255,.06);
     }
-    .navbar-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
+    .nav-inner {
+      max-width: 1140px; margin: 0 auto; padding-inline: 24px;
+      height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
     }
-    .logo { font-weight: 700; font-size: 1.2rem; color: var(--primary); }
+    .nav-links { display: flex; align-items: center; gap: 2px; }
+    .nav-links a {
+      font-size: .88rem; font-weight: 500; color: rgba(228,237,244,.5);
+      padding: 6px 13px; border-radius: 8px; transition: color .2s, background .2s;
+    }
+    .nav-links a:hover { color: rgba(228,237,244,.9); background: rgba(255,255,255,.06); }
+    @media (max-width: 640px) { .nav-links { display: none; } }
     .nav-cta {
-      background: var(--accent);
-      color: #fff;
-      padding: 8px 18px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      transition: background 0.2s;
-    }
-    .nav-cta:hover { background: var(--accent-dark); text-decoration: none; }
-
-    /* ── Hero ── */
-    .hero {
-      background: linear-gradient(135deg, #0070BA 0%, #005a94 60%, #003d6b 100%);
-      color: #fff;
-      padding: 64px 16px 72px;
-      text-align: center;
-    }
-    .hero-flag { font-size: 2rem; margin-bottom: 8px; }
-    .hero h1 {
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 12px;
-    }
-    .hero-urdu {
-      font-family: 'Noto Nastaliq Urdu', serif;
-      font-size: 1.3rem;
-      direction: rtl;
-      color: rgba(255,255,255,0.85);
-      margin-bottom: 16px;
-      display: block;
-    }
-    .hero p {
-      font-size: 1.1rem;
-      color: rgba(255,255,255,0.88);
-      max-width: 600px;
-      margin: 0 auto 32px;
-    }
-    .hero-cta {
-      display: inline-block;
-      background: var(--accent);
-      color: #fff;
-      padding: 16px 36px;
-      border-radius: 10px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      box-shadow: 0 4px 20px rgba(1,165,80,0.4);
-      transition: background 0.2s, transform 0.15s;
-    }
-    .hero-cta:hover { background: var(--accent-dark); transform: translateY(-2px); text-decoration: none; }
-    .hero-cta:active { transform: translateY(0); }
-
-    .trust-badges {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
-    }
-    .badge {
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 20px;
-      padding: 6px 14px;
-      font-size: 0.875rem;
-      color: #fff;
-    }
-
-    /* ── Section wrapper ── */
-    .section { padding: 60px 16px; }
-    .section-alt { background: var(--surface); }
-    .container { max-width: 1100px; margin: 0 auto; }
-    .section-title {
-      text-align: center;
-      font-size: clamp(1.4rem, 3.5vw, 2rem);
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .section-sub {
-      text-align: center;
-      color: var(--text-muted);
-      margin-bottom: 40px;
-    }
-
-    /* ── How it works ── */
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
-    }
-    .step {
-      text-align: center;
-      padding: 28px 20px;
-      background: var(--bg);
-      border-radius: 12px;
-      border: 1px solid var(--border);
-    }
-    .step-num {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: var(--primary);
-      color: #fff;
-      font-size: 1.3rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 16px;
-    }
-    .step h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
-    .step p { font-size: 0.9rem; color: var(--text-muted); }
-
-    /* ── Plans ── */
-    .plans {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-    }
-    .plan-card {
-      border: 2px solid var(--border);
-      border-radius: 14px;
-      padding: 28px 24px;
-      position: relative;
-      background: var(--bg);
-      transition: box-shadow 0.2s;
-    }
-    .plan-card:hover { box-shadow: var(--shadow); }
-    .plan-card.featured {
-      border-color: var(--primary);
-      box-shadow: var(--shadow);
-    }
-    .plan-badge {
-      position: absolute;
-      top: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--primary);
-      color: #fff;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 4px 14px;
-      border-radius: 12px;
+      background: var(--orange); color: #fff;
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: .88rem;
+      padding: 9px 22px; border-radius: 100px;
+      box-shadow: 0 0 24px rgba(245,106,26,.4);
+      transition: background .2s, box-shadow .2s, transform .15s;
       white-space: nowrap;
     }
-    .plan-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
-    .plan-price { font-size: 1.8rem; font-weight: 700; color: var(--primary); margin-bottom: 16px; }
-    .plan-price span { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
-    .plan-features { list-style: none; margin-bottom: 24px; }
-    .plan-features li {
-      padding: 5px 0;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .plan-features li::before { content: '✓'; color: var(--accent); font-weight: 700; }
-    .plan-cta {
-      display: block;
-      text-align: center;
-      background: var(--primary);
-      color: #fff;
-      padding: 12px;
-      border-radius: 8px;
-      font-weight: 600;
-      transition: background 0.2s;
-    }
-    .plan-cta:hover { background: var(--primary-dark); text-decoration: none; }
-    .plan-cta.secondary {
-      background: transparent;
-      color: var(--primary);
-      border: 2px solid var(--primary);
-    }
-    .plan-cta.secondary:hover { background: var(--primary); color: #fff; }
+    .nav-cta:hover { background: var(--orange-hi); transform: translateY(-1px); box-shadow: 0 4px 28px rgba(245,106,26,.55); }
 
-    /* ── Status dashboard ── */
-    .status-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 14px;
+    /* ── Hero ───────────────────────────────────── */
+    .hero {
+      background: #070E1A; color: #E4EDF4;
+      padding-block: 96px 80px;
+      position: relative; overflow: hidden;
     }
-    .status-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    /* Dot grid */
+    .hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(rgba(255,255,255,.055) 1px, transparent 1px);
+      background-size: 30px 30px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 100%);
     }
-    .status-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #94a3b8;
+    /* Glows */
+    .hero::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 50% at 15% -5%, rgba(0,168,85,.25) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 45% at 90% 100%, rgba(245,106,26,.2) 0%, transparent 60%);
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      max-width: 1140px; margin: 0 auto; padding-inline: 24px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 56px; align-items: center;
+    }
+    @media (max-width: 860px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; text-align: center; }
+    }
+
+    .live-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,168,85,.12); border: 1px solid rgba(0,168,85,.28);
+      border-radius: 100px; padding: 5px 14px 5px 10px;
+      font-size: .77rem; font-weight: 600; color: #00D668;
+      letter-spacing: .04em; margin-bottom: 24px;
+    }
+    .pulse { width: 7px; height: 7px; border-radius: 50%; background: #00D668; flex-shrink: 0; position: relative; }
+    .pulse::after {
+      content: ''; position: absolute; inset: -3px; border-radius: 50%;
+      background: rgba(0,214,104,.45);
+      animation: ripple 1.8s ease-out infinite;
+    }
+    @keyframes ripple { to { transform: scale(2.6); opacity: 0; } }
+
+    .hero-text .display { color: #fff; margin-bottom: 20px; }
+    .grad-text {
+      background: linear-gradient(115deg, #00D668 0%, #F56A1A 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-urdu {
+      font-family: 'Noto Nastaliq Urdu', serif; font-size: 1.1rem;
+      direction: rtl; color: rgba(228,237,244,.4); display: block; margin-bottom: 16px;
+    }
+    .hero-sub { font-size: 1.08rem; color: rgba(228,237,244,.62); line-height: 1.7; max-width: 460px; margin-bottom: 36px; }
+    @media (max-width: 860px) { .hero-sub { margin-inline: auto; } }
+
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+    @media (max-width: 860px) { .hero-btns { justify-content: center; } }
+    .btn-orange {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--orange); color: #fff;
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: .97rem;
+      padding: 14px 28px; border-radius: 100px;
+      box-shadow: 0 2px 32px rgba(245,106,26,.42);
+      transition: background .2s, transform .15s, box-shadow .2s;
+    }
+    .btn-orange:hover { background: var(--orange-hi); transform: translateY(-2px); box-shadow: 0 6px 40px rgba(245,106,26,.6); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.06); color: rgba(228,237,244,.75);
+      font-weight: 600; font-size: .97rem;
+      padding: 14px 24px; border-radius: 100px;
+      border: 1.5px solid rgba(255,255,255,.12);
+      transition: all .2s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.11); border-color: rgba(255,255,255,.28); color: #fff; }
+
+    .hero-trust { display: flex; flex-wrap: wrap; gap: 8px; }
+    @media (max-width: 860px) { .hero-trust { justify-content: center; } }
+    .trust-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .79rem; color: rgba(228,237,244,.45);
+      padding: 4px 12px; border-radius: 100px;
+      border: 1px solid rgba(255,255,255,.09);
+    }
+    .trust-pill .dot { width: 5px; height: 5px; border-radius: 50%; background: #00D668; flex-shrink: 0; }
+
+    /* ── Hero visual: notification mockup ───────── */
+    .hero-visual { position: relative; display: flex; align-items: center; justify-content: center; }
+    @media (max-width: 860px) { .hero-visual { order: -1; } }
+
+    .notif-stack { position: relative; width: 100%; max-width: 360px; margin: 0 auto; }
+    .notif-stack::before {
+      content: ''; position: absolute; inset: -60px; pointer-events: none;
+      background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(0,168,85,.14) 0%, transparent 70%);
+    }
+    @keyframes floatUp { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+    .notif-card {
+      background: rgba(13,27,42,.9); backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 20px; padding: 18px 20px;
+      box-shadow: 0 24px 64px rgba(0,0,0,.55), 0 0 0 1px rgba(0,168,85,.08);
+      animation: floatUp 5s ease-in-out infinite;
+    }
+    .notif-card.back {
+      position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%) scale(.9);
+      opacity: .45; z-index: 0; animation-delay: .5s;
+      padding: 14px 20px;
+    }
+    .notif-card.front { position: relative; z-index: 1; }
+
+    .notif-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .notif-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: #0A1628; border: 1px solid rgba(0,168,85,.3);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .notif-app { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .82rem; color: rgba(228,237,244,.9); }
+    .notif-time { font-size: .7rem; color: rgba(228,237,244,.35); margin-top: 1px; }
+    .notif-dot { margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: #00D668; box-shadow: 0 0 8px rgba(0,214,104,.8); flex-shrink: 0; }
+
+    .notif-alert {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      color: #FF7A35; background: rgba(245,106,26,.12); border: 1px solid rgba(245,106,26,.2);
+      padding: 3px 10px; border-radius: 100px; margin-bottom: 10px;
+    }
+    .notif-route { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; color: #fff; margin-bottom: 6px; }
+    .notif-details { font-size: .83rem; color: rgba(228,237,244,.5); line-height: 1.6; margin-bottom: 14px; }
+    .notif-details span { color: rgba(228,237,244,.8); }
+    .notif-cta {
+      display: block; text-align: center;
+      background: var(--orange); color: #fff;
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: .82rem;
+      padding: 9px; border-radius: 10px;
+    }
+
+    .notif-back-text { font-size: .82rem; color: rgba(228,237,244,.6); }
+    .notif-back-text strong { color: rgba(228,237,244,.9); }
+
+    /* Floating badges */
+    .float-chip {
+      position: absolute; z-index: 2;
+      background: rgba(13,27,42,.95); backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,.1); border-radius: 100px;
+      padding: 6px 14px; font-size: .78rem; font-weight: 600;
+      color: rgba(228,237,244,.8); white-space: nowrap;
+      box-shadow: 0 8px 24px rgba(0,0,0,.4);
+    }
+    .chip-speed { top: -16px; right: -8px; color: #00D668; border-color: rgba(0,168,85,.3); animation: floatUp 4s ease-in-out infinite .8s; }
+    .chip-wa    { bottom: 14px; left: -16px; animation: floatUp 4.5s ease-in-out infinite 1.4s; }
+
+    /* ── Stats bar ──────────────────────────────── */
+    .stats-bar { background: rgba(255,255,255,.025); border-top: 1px solid rgba(255,255,255,.07); border-bottom: 1px solid rgba(255,255,255,.07); padding-block: 0; background: #070E1A; }
+    .stats-inner { max-width: 1140px; margin: 0 auto; padding-inline: 24px; display: flex; justify-content: center; flex-wrap: wrap; }
+    .stat-item {
+      text-align: center; padding: 22px 48px;
+      border-right: 1px solid rgba(255,255,255,.07);
+      flex: 1 0 auto;
+    }
+    .stat-item:last-child { border-right: none; }
+    @media (max-width: 540px) { .stat-item { padding: 18px 22px; border-right: none; flex: 0 0 50%; } }
+    .stat-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.9rem; color: var(--orange); font-variant-numeric: tabular-nums; line-height: 1; margin-bottom: 4px; }
+    .stat-label { font-size: .75rem; color: rgba(228,237,244,.35); letter-spacing: .04em; text-transform: uppercase; }
+
+    /* ── How it works ───────────────────────────── */
+    .steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; }
+    @media (max-width: 700px) { .steps-grid { grid-template-columns: 1fr; } }
+    .step {
+      background: var(--surface); padding: 40px 30px; position: relative;
+    }
+    .step:first-child { border-radius: var(--r-lg) 0 0 var(--r-lg); }
+    .step:last-child  { border-radius: 0 var(--r-lg) var(--r-lg) 0; }
+    @media (max-width: 700px) {
+      .step:first-child { border-radius: var(--r) var(--r) 0 0; }
+      .step:last-child  { border-radius: 0 0 var(--r) var(--r); }
+      .step:not(:first-child):not(:last-child) { border-radius: 0; }
+    }
+    .step-n {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 4.5rem;
+      line-height: 1; margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--orange), var(--green));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: .22;
+    }
+    .step h3 { margin-bottom: 8px; }
+    .step p { font-size: .9rem; color: var(--ink2); line-height: 1.65; }
+    .step-arrow {
+      position: absolute; right: -16px; top: 50%; transform: translateY(-50%);
+      width: 30px; height: 30px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: .85rem; color: var(--border); z-index: 2;
+    }
+    @media (max-width: 700px) { .step-arrow { display: none; } }
+
+    /* ── Bento features ─────────────────────────── */
+    .bento { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+    @media (max-width: 860px) { .bento { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .bento { grid-template-columns: 1fr; } }
+
+    .b-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 28px 26px;
+      display: flex; flex-direction: column; gap: 12px;
+      position: relative; overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .b-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(10,22,40,.1); }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .b-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.4); }
+    }
+    :root[data-theme="dark"] .b-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.4); }
+    .b-card.span-2 { grid-column: span 2; }
+    @media (max-width: 520px) { .b-card.span-2 { grid-column: span 1; } }
+
+    .b-card::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      opacity: 0; transition: opacity .3s;
+    }
+    .b-card.green-glow::before { background: radial-gradient(ellipse 70% 60% at 0% 0%, rgba(0,168,85,.08) 0%, transparent 70%); }
+    .b-card.orange-glow::before { background: radial-gradient(ellipse 70% 60% at 100% 0%, rgba(245,106,26,.08) 0%, transparent 70%); }
+    .b-card:hover::before { opacity: 1; }
+
+    .b-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
-    .status-dot.available { background: var(--accent); box-shadow: 0 0 8px rgba(1,165,80,0.5); }
-    .status-dot.unavailable { background: #ef4444; }
-    .status-route { font-size: 0.9rem; font-weight: 600; }
-    .status-label { font-size: 0.75rem; color: var(--text-muted); }
+    .bi-green  { background: var(--green-bg); }
+    .bi-orange { background: var(--orange-bg); }
+    .bi-dark   { background: var(--surface2); }
+    .b-icon svg { width: 22px; height: 22px; }
 
-    /* ── FAQ ── */
-    .faq-list { max-width: 700px; margin: 0 auto; }
-    .faq-item {
-      border-bottom: 1px solid var(--border);
-      padding: 20px 0;
+    .b-big-num {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 3.2rem;
+      line-height: 1; letter-spacing: -.03em; color: var(--ink);
+      font-variant-numeric: tabular-nums;
     }
-    .faq-q { font-weight: 600; margin-bottom: 8px; }
-    .faq-a { color: var(--text-muted); font-size: 0.95rem; }
+    .b-big-num .unit { font-size: 1.4rem; color: var(--ink3); margin-left: 4px; }
+    .b-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; color: var(--ink); }
+    .b-desc { font-size: .87rem; color: var(--ink2); line-height: 1.6; }
 
-    /* ── Footer ── */
-    footer {
-      background: var(--text);
-      color: rgba(255,255,255,0.7);
-      text-align: center;
-      padding: 24px 16px;
-      font-size: 0.85rem;
+    .flag-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 4px; }
+    .flag-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 100px; padding: 4px 11px; font-size: .79rem; color: var(--ink2);
     }
-    footer strong { color: #fff; }
 
-    @media (max-width: 480px) {
-      .hero { padding: 48px 16px 56px; }
-      .hero-cta { display: block; }
+    .monitor-row { display: flex; flex-direction: column; gap: 6px; }
+    .mon-item {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--surface2); border-radius: 8px; padding: 7px 10px;
+      font-size: .8rem; color: var(--ink2);
+    }
+    .mon-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .mon-on  { background: var(--green); box-shadow: 0 0 6px rgba(0,168,85,.6); }
+    .mon-off { background: var(--ink3); }
+    .mon-label { flex: 1; }
+    .mon-speed { font-size: .72rem; font-weight: 600; color: var(--orange); margin-left: auto; }
+
+    /* ── Plans ──────────────────────────────────── */
+    .bg-surface { background: var(--surface); }
+    .plans-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; align-items: start; }
+    @media (max-width: 860px) { .plans-grid { grid-template-columns: 1fr; max-width: 400px; margin-inline: auto; } }
+    .plan {
+      background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: var(--r-xl); padding: 32px 28px;
+      display: flex; flex-direction: column; position: relative;
+      transition: box-shadow .25s, transform .25s;
+    }
+    .plan:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(10,22,40,.1); }
+    .plan.featured { border-color: var(--orange); background: var(--surface); box-shadow: 0 0 0 1px var(--orange), 0 8px 40px rgba(245,106,26,.12); }
+    .plan.vip { border-color: var(--green); }
+    .plan-badge {
+      font-size: .68rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 100px; display: inline-block; margin-bottom: 20px; width: fit-content;
+    }
+    .pb-free { background: var(--surface2); color: var(--ink3); }
+    .pb-pro  { background: var(--orange-bg); color: var(--orange); }
+    .pb-vip  { background: var(--green-bg); color: var(--green); }
+    .plan-popular {
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: var(--orange); color: #fff;
+      font-size: .68rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+      padding: 4px 14px; border-radius: 100px; white-space: nowrap;
+    }
+    .plan-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.15rem; margin-bottom: 6px; }
+    .plan-price { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2.3rem; line-height: 1; letter-spacing: -.03em; margin-bottom: 2px; }
+    .plan-price sub { font-size: .8rem; font-weight: 500; color: var(--ink3); vertical-align: baseline; }
+    .plan-cycle { font-size: .82rem; color: var(--ink3); margin-bottom: 24px; }
+    .plan-divider { height: 1px; background: var(--border); margin-bottom: 20px; }
+    .plan-feats { flex: 1; display: flex; flex-direction: column; gap: 11px; margin-bottom: 28px; }
+    .feat { display: flex; align-items: flex-start; gap: 10px; font-size: .88rem; color: var(--ink2); }
+    .feat-check {
+      flex-shrink: 0; width: 17px; height: 17px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: .62rem; font-weight: 800; margin-top: 2px;
+    }
+    .plan.featured .feat-check { background: var(--orange-bg); color: var(--orange); }
+    .plan.vip      .feat-check { background: var(--green-bg); color: var(--green); }
+    .plan:not(.featured):not(.vip) .feat-check { background: var(--surface2); color: var(--ink3); }
+    .plan-btn {
+      display: block; text-align: center;
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: .92rem;
+      padding: 13px; border-radius: 100px; transition: all .2s;
+    }
+    .pbo { background: var(--orange); color: #fff; box-shadow: 0 2px 18px rgba(245,106,26,.3); }
+    .pbo:hover { background: var(--orange-hi); box-shadow: 0 4px 28px rgba(245,106,26,.5); }
+    .pbg { background: var(--green); color: #fff; box-shadow: 0 2px 18px rgba(0,168,85,.3); }
+    .pbg:hover { background: var(--green-hi); }
+    .pbout { background: transparent; color: var(--ink2); border: 1.5px solid var(--border); }
+    .pbout:hover { border-color: var(--ink3); color: var(--ink); }
+
+    /* ── Status monitor ─────────────────────────── */
+    .status-sec { background: #070E1A; padding-block: 88px; }
+    .status-sec .sec-head .h2 { color: #E4EDF4; }
+    .status-sec .sec-head p  { color: rgba(228,237,244,.45); }
+    .terminal {
+      background: #0D1B2A; border-radius: var(--r-lg);
+      border: 1px solid rgba(0,168,85,.16);
+      overflow: hidden;
+      box-shadow: 0 0 80px rgba(0,168,85,.07), 0 0 0 1px rgba(0,168,85,.05);
+    }
+    .term-bar {
+      background: #0A1628; padding: 11px 18px;
+      display: flex; align-items: center; gap: 14px;
+      border-bottom: 1px solid rgba(0,168,85,.1);
+    }
+    .term-dots { display: flex; gap: 6px; }
+    .term-dots i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+    .td1{background:#FF6B6B;}.td2{background:#FFD166;}.td3{background:#06D6A0;}
+    .term-title { flex: 1; text-align: center; font-family: monospace; font-size: .68rem; color: rgba(0,214,104,.4); letter-spacing: .14em; }
+    .term-live { font-family: monospace; font-size: .68rem; color: #00D668; background: rgba(0,214,104,.1); padding: 2px 9px; border-radius: 4px; display: flex; align-items: center; gap: 5px; }
+    .term-body { padding: 22px; }
+    .s-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+    .s-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; border-radius: 9px;
+      background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.04);
+    }
+    .s-dot { width: 8px; height: 8px; border-radius: 50%; background: #1A3050; flex-shrink: 0; }
+    .s-dot.on  { background: #00D668; box-shadow: 0 0 8px rgba(0,214,104,.7); animation: blink 2.5s ease-in-out infinite; }
+    .s-dot.off { background: #FF6B6B; }
+    @keyframes blink { 50% { opacity: .4; } }
+    .s-name { font-size: .84rem; color: rgba(228,237,244,.65); flex: 1; }
+    .s-st { font-family: monospace; font-size: .71rem; }
+    .s-st.on   { color: #00D668; }
+    .s-st.off  { color: #FF6B6B; }
+    .s-st.wait { color: rgba(228,237,244,.25); }
+    .term-foot {
+      padding: 12px 22px; border-top: 1px solid rgba(0,168,85,.09);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    }
+    .term-ts { font-family: monospace; font-size: .68rem; color: rgba(228,237,244,.22); }
+    .term-refresh {
+      background: transparent; border: 1px solid rgba(0,168,85,.28); color: #00D668;
+      font-family: monospace; font-size: .7rem;
+      padding: 4px 12px; border-radius: 4px; cursor: pointer; transition: all .2s;
+    }
+    .term-refresh:hover { background: rgba(0,168,85,.1); }
+
+    /* ── Blog preview ───────────────────────────── */
+    .blog-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    @media (max-width: 860px) { .blog-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .blog-grid { grid-template-columns: 1fr; } }
+    .blog-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .blog-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(10,22,40,.1); }
+    .blog-thumb {
+      height: 156px; display: flex; align-items: center; justify-content: center;
+      font-size: 2.8rem; position: relative;
+    }
+    .t1{background:linear-gradient(135deg,#071328,#0D2218);}
+    .t2{background:linear-gradient(135deg,#1A0808,#2A1206);}
+    .t3{background:linear-gradient(135deg,#08082A,#0A162E);}
+    .blog-cat {
+      position: absolute; top: 12px; left: 12px;
+      font-size: .67rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      background: var(--orange); color: #fff; padding: 3px 10px; border-radius: 100px;
+    }
+    .blog-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .blog-meta { font-size: .77rem; color: var(--ink3); margin-bottom: 8px; }
+    .blog-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .98rem; margin-bottom: 8px; line-height: 1.4; color: var(--ink); }
+    .blog-excerpt { font-size: .87rem; color: var(--ink2); line-height: 1.6; flex: 1; }
+    .blog-link { display: inline-flex; align-items: center; gap: 5px; font-size: .84rem; font-weight: 600; color: var(--orange); margin-top: 14px; transition: gap .2s; }
+    .blog-link:hover { gap: 9px; }
+
+    /* ── FAQ ────────────────────────────────────── */
+    .faq-wrap { max-width: 720px; margin-inline: auto; }
+    details { border-bottom: 1px solid var(--border); }
+    details:first-child { border-top: 1px solid var(--border); }
+    summary {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 0; cursor: pointer; list-style: none;
+      font-family: 'Syne', sans-serif; font-weight: 600; font-size: .98rem; gap: 16px;
+    }
+    summary::-webkit-details-marker { display: none; }
+    .faq-ico {
+      flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%;
+      background: var(--surface2); color: var(--ink2);
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+      transition: transform .25s, background .2s, color .2s;
+    }
+    details[open] .faq-ico { transform: rotate(45deg); background: var(--orange-bg); color: var(--orange); }
+    details p { padding-bottom: 20px; color: var(--ink2); font-size: .93rem; line-height: 1.75; }
+    details p strong { color: var(--ink); font-weight: 600; }
+
+    /* ── CTA band ───────────────────────────────── */
+    .cta-band {
+      background: #070E1A; padding-block: 80px; text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-band::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 90% 70% at 50% 50%, rgba(245,106,26,.14) 0%, transparent 65%),
+                  radial-gradient(ellipse 60% 50% at 20% 100%, rgba(0,168,85,.1) 0%, transparent 60%);
+    }
+    .cta-band .h2 { color: #fff; margin-bottom: 12px; position: relative; }
+    .cta-band p { color: rgba(228,237,244,.55); margin-bottom: 36px; position: relative; font-size: 1.05rem; }
+    .cta-band .btn-orange { position: relative; font-size: 1rem; }
+
+    /* ── Footer ─────────────────────────────────── */
+    footer { background: #060C18; color: rgba(228,237,244,.4); padding-block: 52px 32px; }
+    .footer-inner { max-width: 1140px; margin: 0 auto; padding-inline: 24px; }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr repeat(3,1fr); gap: 48px;
+      padding-bottom: 44px; border-bottom: 1px solid rgba(255,255,255,.06); margin-bottom: 28px;
+    }
+    @media (max-width: 760px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 440px) { .footer-top { grid-template-columns: 1fr; } }
+    .footer-brand p { font-size: .87rem; margin-top: 14px; line-height: 1.7; max-width: 240px; }
+    .footer-col h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .82rem; color: rgba(228,237,244,.75); margin-bottom: 16px; letter-spacing: .04em; text-transform: uppercase; }
+    .footer-col ul { display: flex; flex-direction: column; gap: 9px; }
+    .footer-col a { font-size: .84rem; transition: color .2s; }
+    .footer-col a:hover { color: var(--orange); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: .79rem; }
+    .footer-bottom a { color: rgba(228,237,244,.3); transition: color .2s; }
+    .footer-bottom a:hover { color: var(--orange); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
     }
   </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar">
-  <div class="navbar-inner">
-    <div class="logo">🇵🇰 VFS Alert PK</div>
+<!-- ── Navbar ─────────────────────────────────────── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo-mark">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+        <rect width="34" height="34" rx="9" fill="#0A1628"/>
+        <path d="M17 6C13.7 6 11 8.7 11 12V19L9 21H25L23 19V12C23 8.7 20.3 6 17 6Z" fill="#00A855"/>
+        <path d="M14 21C14 22.7 15.3 24 17 24C18.7 24 20 22.7 20 21H14Z" fill="#00A855"/>
+        <circle cx="24" cy="9" r="5" fill="#F56A1A"/>
+        <circle cx="24" cy="9" r="2" fill="white"/>
+      </svg>
+      <span class="logo-word" style="color:#E4EDF4">VFS Alert <span>PK</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#plans">Plans</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
     <a href="subscribe.html" class="nav-cta">Subscribe Now</a>
   </div>
 </nav>
 
-<!-- Hero -->
+<!-- ── Hero ───────────────────────────────────────── -->
 <section class="hero">
-  <div class="hero-flag">🇵🇰</div>
-  <h1>VFS Visa Slot Alerts 🚨<br>Never Miss a Slot Again</h1>
-  <span class="hero-urdu">پاکستان سے ویزہ — فوری وٹس ایپ الرٹ</span>
-  <p>Get instant WhatsApp alerts the moment UK, Schengen, or Canada visa slots open in Lahore, Islamabad &amp; Karachi</p>
-  <a href="subscribe.html" class="hero-cta">Subscribe Now — Rs. 1,500/month</a>
-  <div class="trust-badges">
-    <span class="badge">✅ WhatsApp alerts</span>
-    <span class="badge">✅ All VFS centres</span>
-    <span class="badge">✅ 60-second monitoring</span>
+  <div class="hero-inner">
+
+    <!-- Left: copy -->
+    <div class="hero-text">
+      <div class="live-badge">
+        <span class="pulse"></span>
+        Monitoring Active — 7 Routes
+      </div>
+      <h1 class="display">
+        Never Miss a<br>
+        <span class="grad-text">VFS Visa Slot</span><br>
+        Again
+      </h1>
+      <span class="hero-urdu">پاکستان سے ویزہ — فوری وٹس ایپ الرٹ</span>
+      <p class="hero-sub">Instant WhatsApp alerts the moment UK, Schengen or Canada slots open at VFS Pakistan — in Lahore, Islamabad &amp; Karachi.</p>
+      <div class="hero-btns">
+        <a href="subscribe.html" class="btn-orange">Get Alerts — from Rs. 1,500/mo →</a>
+        <a href="#plans" class="btn-ghost">View Plans</a>
+      </div>
+      <div class="hero-trust">
+        <span class="trust-pill"><span class="dot"></span>WhatsApp alerts</span>
+        <span class="trust-pill"><span class="dot"></span>60-second checks</span>
+        <span class="trust-pill"><span class="dot"></span>All VFS centres</span>
+        <span class="trust-pill"><span class="dot"></span>24/7 monitoring</span>
+      </div>
+    </div>
+
+    <!-- Right: WhatsApp notification mockup -->
+    <div class="hero-visual">
+      <div class="notif-stack">
+
+        <!-- Back card -->
+        <div class="notif-card back">
+          <div class="notif-back-text"><strong>✅ Subscription Activated</strong><br>Monitoring started for UK + Schengen routes in Lahore</div>
+        </div>
+
+        <!-- Front card: alert -->
+        <div class="notif-card front">
+          <div class="notif-header">
+            <div class="notif-icon">
+              <svg viewBox="0 0 22 22" fill="none"><path d="M11 3C7.7 3 5 5.7 5 9V15L3 17H19L17 15V9C17 5.7 14.3 3 11 3Z" fill="#00A855"/><path d="M8.5 17C8.5 18.4 9.6 19.5 11 19.5C12.4 19.5 13.5 18.4 13.5 17H8.5Z" fill="#00A855"/><circle cx="17" cy="5" r="4" fill="#F56A1A"/><circle cx="17" cy="5" r="1.5" fill="white"/></svg>
+            </div>
+            <div>
+              <div class="notif-app">VFS Alert PK</div>
+              <div class="notif-time">just now</div>
+            </div>
+            <div class="notif-dot"></div>
+          </div>
+          <div class="notif-alert">🚨 Slot Available</div>
+          <div class="notif-route">Pakistan → UK Visa</div>
+          <div class="notif-details">
+            📍 <span>Lahore VFS Centre</span><br>
+            📅 <span>Multiple dates available</span><br>
+            ⚡ <span>Act fast — slots fill in seconds</span>
+          </div>
+          <div class="notif-cta">Book Appointment →</div>
+        </div>
+
+        <!-- Floating chips -->
+        <div class="float-chip chip-speed">⚡ Sent in 1.8s</div>
+        <div class="float-chip chip-wa">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#25D366"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.7-.8-2.8-1.5-3.9-3.4-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5-.1-.1-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.1 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.1-1.4-.1-.2-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.2L2 22l5-1.3C8.5 21.5 10.2 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.2-.4-4.6-1.2l-.3-.2-3 .8.8-2.9-.2-.3c-.8-1.4-1.3-3-1.3-4.7 0-4.6 3.7-8.3 8.3-8.3 4.6 0 8.3 3.7 8.3 8.3.2 4.6-3.5 8.5-8 8.5z"/></svg>
+          WhatsApp only
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- How it works -->
-<section class="section section-alt">
-  <div class="container">
-    <h2 class="section-title">How It Works</h2>
-    <p class="section-sub">Three simple steps to never miss a VFS slot again</p>
-    <div class="steps">
+<!-- ── Stats bar ──────────────────────────────────── -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">7</div>
+      <div class="stat-label">Visa Routes</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Cities Covered</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">60s</div>
+      <div class="stat-label">Check Interval</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">24/7</div>
+      <div class="stat-label">Always On</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── How it works ────────────────────────────────── -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">Process</span>
+      <h2 class="h2">Three steps to never miss a slot</h2>
+      <p>No app to install, no constant refreshing — just instant WhatsApp alerts.</p>
+    </div>
+    <div class="steps-grid">
       <div class="step">
-        <div class="step-num">1</div>
-        <h3>Choose Your Route &amp; City</h3>
-        <p>Select your visa destination (UK, Italy, Canada, etc.) and your VFS centre city</p>
+        <div class="step-n">01</div>
+        <h3 class="h3">Choose Your Route &amp; City</h3>
+        <p>Pick your visa destination country and the VFS centre city you want to monitor — up to all 7 routes on Pro and VIP.</p>
+        <span class="step-arrow">→</span>
       </div>
       <div class="step">
-        <div class="step-num">2</div>
-        <h3>Pay via JazzCash</h3>
-        <p>Send your subscription fee to our JazzCash number and submit your transaction ID</p>
+        <div class="step-n">02</div>
+        <h3 class="h3">Pay via JazzCash</h3>
+        <p>Send your subscription fee to our JazzCash number and paste the transaction ID in the subscription form — takes 2 minutes.</p>
+        <span class="step-arrow">→</span>
       </div>
       <div class="step">
-        <div class="step-num">3</div>
-        <h3>Get Instant Alerts 24/7</h3>
-        <p>The moment a slot opens, you receive a WhatsApp message instantly — day or night</p>
+        <div class="step-n">03</div>
+        <h3 class="h3">Receive Instant Alerts</h3>
+        <p>The moment a slot opens, you get a WhatsApp message with the booking link — day or night, within 60 seconds.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Plans -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title">Simple, Transparent Pricing</h2>
-    <p class="section-sub">Choose the plan that fits your needs</p>
-    <div class="plans">
+<!-- ── Bento features ──────────────────────────────── -->
+<section class="sec bg-surface">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">Why It Works</span>
+      <h2 class="h2">Built for Pakistani visa applicants</h2>
+      <p>Slots disappear in seconds. Our system monitors faster than you can manually refresh.</p>
+    </div>
+    <div class="bento">
 
-      <div class="plan-card">
-        <div class="plan-name">FREE Trial</div>
-        <div class="plan-price">Rs. 0 <span>/7 days</span></div>
-        <ul class="plan-features">
-          <li>UK route only</li>
-          <li>1 city</li>
-          <li>15-minute monitoring</li>
-          <li>7-day trial</li>
+      <!-- Big card: speed -->
+      <div class="b-card green-glow span-2">
+        <div class="b-icon bi-green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="b-big-num">60<span class="unit">sec</span></div>
+        <div class="b-title">Monitoring every 60 seconds</div>
+        <div class="b-desc">Our Cloudflare Worker checks VFS Global every 60 seconds on Pro, every 30 on VIP. Human refreshing can't compete with automated monitoring at that speed.</div>
+        <div class="monitor-row">
+          <div class="mon-item"><span class="mon-dot mon-on"></span><span class="mon-label">VIP plan</span><span class="mon-speed">30s checks</span></div>
+          <div class="mon-item"><span class="mon-dot mon-on"></span><span class="mon-label">Pro plan</span><span class="mon-speed">60s checks</span></div>
+          <div class="mon-item"><span class="mon-dot mon-off"></span><span class="mon-label">Manual refresh</span><span class="mon-speed">minutes</span></div>
+        </div>
+      </div>
+
+      <!-- Small card: routes -->
+      <div class="b-card orange-glow">
+        <div class="b-icon bi-orange">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+        </div>
+        <div class="b-big-num">7</div>
+        <div class="b-title">Visa routes monitored</div>
+        <div class="b-desc">UK, Italy, France, Germany, Canada, Australia &amp; Netherlands.</div>
+        <div class="flag-row">
+          <span class="flag-pill">🇬🇧 UK</span>
+          <span class="flag-pill">🇮🇹 Italy</span>
+          <span class="flag-pill">🇫🇷 France</span>
+          <span class="flag-pill">🇩🇪 Germany</span>
+          <span class="flag-pill">🇨🇦 Canada</span>
+          <span class="flag-pill">🇦🇺 Australia</span>
+          <span class="flag-pill">🇳🇱 Netherlands</span>
+        </div>
+      </div>
+
+      <!-- Small card: WhatsApp only -->
+      <div class="b-card">
+        <div class="b-icon bi-dark">
+          <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.7-.8-2.8-1.5-3.9-3.4-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5-.1-.1-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.1 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.1-1.4-.1-.2-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.2L2 22l5-1.3C8.5 21.5 10.2 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.2-.4-4.6-1.2l-.3-.2-3 .8.8-2.9-.2-.3c-.8-1.4-1.3-3-1.3-4.7 0-4.6 3.7-8.3 8.3-8.3 4.6 0 8.3 3.7 8.3 8.3.2 4.6-3.5 8.5-8 8.5z"/></svg>
+        </div>
+        <div class="b-title">Zero downloads</div>
+        <div class="b-desc">Alerts come straight to your existing WhatsApp. No app, no account, no dashboard to check.</div>
+      </div>
+
+      <!-- Small card: cities -->
+      <div class="b-card">
+        <div class="b-icon bi-green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="b-title">3 Pakistani cities</div>
+        <div class="b-desc">Lahore, Islamabad &amp; Karachi VFS centres — all monitored on Pro and VIP plans.</div>
+        <div class="flag-row">
+          <span class="flag-pill">📍 Lahore</span>
+          <span class="flag-pill">📍 Islamabad</span>
+          <span class="flag-pill">📍 Karachi</span>
+        </div>
+      </div>
+
+      <!-- Big card: JazzCash -->
+      <div class="b-card orange-glow span-2">
+        <div class="b-icon bi-orange">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <div class="b-title">Pay with JazzCash — no card needed</div>
+        <div class="b-desc">Subscriptions are paid via JazzCash mobile wallet. Simply send the fee, paste your transaction ID in the form, and we activate within 2 hours — no debit card, no international payment.</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:4px">
+          <span class="flag-pill" style="font-size:.85rem;padding:6px 14px">✅ Free 7-day trial</span>
+          <span class="flag-pill" style="font-size:.85rem;padding:6px 14px">Rs. 1,500/mo Pro</span>
+          <span class="flag-pill" style="font-size:.85rem;padding:6px 14px">Rs. 3,000/mo VIP</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Plans ───────────────────────────────────────── -->
+<section class="sec" id="plans">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">Pricing</span>
+      <h2 class="h2">Simple, transparent plans</h2>
+      <p>Start free, upgrade when you need faster alerts or more routes.</p>
+    </div>
+    <div class="plans-grid">
+
+      <div class="plan">
+        <span class="plan-badge pb-free">Free Trial</span>
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">Rs. 0</div>
+        <div class="plan-cycle">7-day free trial</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-feats">
+          <li class="feat"><span class="feat-check">✓</span>UK route only</li>
+          <li class="feat"><span class="feat-check">✓</span>1 city</li>
+          <li class="feat"><span class="feat-check">✓</span>15-minute monitoring</li>
+          <li class="feat"><span class="feat-check">✓</span>WhatsApp alerts</li>
         </ul>
-        <a href="subscribe.html?plan=free" class="plan-cta secondary">Start Free Trial</a>
+        <a href="subscribe.html?plan=free" class="plan-btn pbout">Start Free Trial</a>
       </div>
 
-      <div class="plan-card featured">
-        <div class="plan-badge">Most Popular</div>
-        <div class="plan-name">PRO Alert</div>
-        <div class="plan-price">Rs. 1,500 <span>/month</span></div>
-        <ul class="plan-features">
-          <li>All 7 routes</li>
-          <li>All 3 cities</li>
-          <li>1-minute monitoring</li>
-          <li>Instant WhatsApp alerts</li>
-          <li>3-month discount available</li>
+      <div class="plan featured">
+        <span class="plan-popular">Most Popular</span>
+        <span class="plan-badge pb-pro">Pro Alert</span>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">Rs. 1,500<sub>/mo</sub></div>
+        <div class="plan-cycle">Billed monthly via JazzCash</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-feats">
+          <li class="feat"><span class="feat-check">✓</span>All 7 visa routes</li>
+          <li class="feat"><span class="feat-check">✓</span>All 3 cities</li>
+          <li class="feat"><span class="feat-check">✓</span>1-minute monitoring</li>
+          <li class="feat"><span class="feat-check">✓</span>Instant WhatsApp alerts</li>
+          <li class="feat"><span class="feat-check">✓</span>3-month discount available</li>
         </ul>
-        <a href="subscribe.html?plan=pro" class="plan-cta">Subscribe — PRO</a>
+        <a href="subscribe.html?plan=pro" class="plan-btn pbo">Subscribe — Pro</a>
       </div>
 
-      <div class="plan-card">
-        <div class="plan-name">VIP Auto-Alert</div>
-        <div class="plan-price">Rs. 3,000 <span>/month</span></div>
-        <ul class="plan-features">
-          <li>All 7 routes</li>
-          <li>All 3 cities</li>
-          <li>30-second monitoring</li>
-          <li>Priority alerts</li>
-          <li>WhatsApp support</li>
+      <div class="plan vip">
+        <span class="plan-badge pb-vip">VIP</span>
+        <div class="plan-name">VIP</div>
+        <div class="plan-price">Rs. 3,000<sub>/mo</sub></div>
+        <div class="plan-cycle">Billed monthly via JazzCash</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-feats">
+          <li class="feat"><span class="feat-check">✓</span>All 7 visa routes</li>
+          <li class="feat"><span class="feat-check">✓</span>All 3 cities</li>
+          <li class="feat"><span class="feat-check">✓</span>30-second monitoring</li>
+          <li class="feat"><span class="feat-check">✓</span>Priority WhatsApp alerts</li>
+          <li class="feat"><span class="feat-check">✓</span>WhatsApp support line</li>
         </ul>
-        <a href="subscribe.html?plan=vip" class="plan-cta">Subscribe — VIP</a>
+        <a href="subscribe.html?plan=vip" class="plan-btn pbg">Subscribe — VIP</a>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- Live Status -->
-<section class="section section-alt">
-  <div class="container">
-    <h2 class="section-title">Live Slot Status</h2>
-    <p class="section-sub">Real-time monitoring — updated every minute</p>
-    <div class="status-grid" id="statusGrid">
-      <div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:24px;">Loading live status…</div>
+<!-- ── Live Status ─────────────────────────────────── -->
+<section class="status-sec" id="status">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label" style="color:rgba(228,237,244,.3)">Live Monitor</span>
+      <h2 class="h2">Real-time slot status</h2>
+      <p>Updated every 60 seconds across all monitored routes and cities.</p>
+    </div>
+    <div class="terminal">
+      <div class="term-bar">
+        <div class="term-dots"><i class="td1"></i><i class="td2"></i><i class="td3"></i></div>
+        <span class="term-title">VFS_ALERT_PK — SLOT MONITOR v1.0</span>
+        <span class="term-live"><span class="pulse" style="width:6px;height:6px"></span>LIVE</span>
+      </div>
+      <div class="term-body">
+        <div class="s-grid" id="statusGrid">
+          <div class="s-row"><span class="s-dot"></span><span class="s-name">Pakistan → UK (Lahore)</span><span class="s-st wait">checking…</span></div>
+          <div class="s-row"><span class="s-dot"></span><span class="s-name">Pakistan → UK (Islamabad)</span><span class="s-st wait">checking…</span></div>
+          <div class="s-row"><span class="s-dot"></span><span class="s-name">Pakistan → Italy (Lahore)</span><span class="s-st wait">checking…</span></div>
+          <div class="s-row"><span class="s-dot"></span><span class="s-name">Pakistan → France (Lahore)</span><span class="s-st wait">checking…</span></div>
+          <div class="s-row"><span class="s-dot"></span><span class="s-name">Pakistan → Germany (Lahore)</span><span class="s-st wait">checking…</span></div>
+          <div class="s-row"><span class="s-dot"></span><span class="s-name">Pakistan → Canada (Lahore)</span><span class="s-st wait">checking…</span></div>
+          <div class="s-row"><span class="s-dot"></span><span class="s-name">Pakistan → Australia (Lahore)</span><span class="s-st wait">checking…</span></div>
+        </div>
+      </div>
+      <div class="term-foot">
+        <span class="term-ts" id="termTs">last_check: —</span>
+        <button class="term-refresh" onclick="loadStatus()">↺ refresh</button>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title">Frequently Asked Questions</h2>
-    <div class="faq-list">
-
-      <div class="faq-item">
-        <div class="faq-q">How do I pay?</div>
-        <div class="faq-a">Send payment to JazzCash <strong>0331-862-7018</strong> and submit the reference number in our subscription form.</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q">When will I be activated?</div>
-        <div class="faq-a">Within 2 hours of payment verification. You'll receive a WhatsApp confirmation once your subscription is active.</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q">What if I miss an alert?</div>
-        <div class="faq-a">You receive every new slot alert for your routes instantly on WhatsApp. Slots reopen periodically, so stay ready.</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q">Which countries does VFS Alert PK cover?</div>
-        <div class="faq-a">UK, Italy, France, Germany, Canada, Australia, and Netherlands — all countries processed through VFS Global Pakistan.</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q">How fast is the alert?</div>
-        <div class="faq-a">Pro alerts arrive within 1 minute of a slot opening. VIP alerts within 30 seconds. Slots usually disappear in 30–90 seconds, so speed matters!</div>
-      </div>
-
+<!-- ── Blog preview ────────────────────────────────── -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">Resources</span>
+      <h2 class="h2">Visa guides &amp; tips</h2>
+      <p>Everything you need to know about getting a visa appointment in Pakistan.</p>
+    </div>
+    <div class="blog-grid">
+      <a href="blog.html" class="blog-card">
+        <div class="blog-thumb t1"><span>🇬🇧</span><span class="blog-cat">Guide</span></div>
+        <div class="blog-body">
+          <div class="blog-meta">Oct 2026 · 5 min read</div>
+          <div class="blog-title">UK Visa from Pakistan: Complete 2026 Guide</div>
+          <div class="blog-excerpt">Step-by-step walkthrough of the UK visa process from Pakistan, including VFS appointment booking.</div>
+          <span class="blog-link">Read more →</span>
+        </div>
+      </a>
+      <a href="blog.html" class="blog-card">
+        <div class="blog-thumb t2"><span>🇪🇺</span><span class="blog-cat">Tips</span></div>
+        <div class="blog-body">
+          <div class="blog-meta">Oct 2026 · 4 min read</div>
+          <div class="blog-title">Schengen Visa Tips for Pakistani Applicants</div>
+          <div class="blog-excerpt">How to maximise your chances and what to do when VFS slots disappear in seconds.</div>
+          <span class="blog-link">Read more →</span>
+        </div>
+      </a>
+      <a href="blog.html" class="blog-card">
+        <div class="blog-thumb t3"><span>⚡</span><span class="blog-cat">How-to</span></div>
+        <div class="blog-body">
+          <div class="blog-meta">Sep 2026 · 3 min read</div>
+          <div class="blog-title">How VFS Slot Monitoring Works</div>
+          <div class="blog-excerpt">Behind the scenes: how our system checks VFS every 60 seconds and fires alerts within seconds.</div>
+          <span class="blog-link">Read more →</span>
+        </div>
+      </a>
     </div>
   </div>
 </section>
 
+<!-- ── FAQ ─────────────────────────────────────────── -->
+<section class="sec bg-surface">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">FAQ</span>
+      <h2 class="h2">Questions answered</h2>
+    </div>
+    <div class="faq-wrap">
+      <details open>
+        <summary>How do I pay? <span class="faq-ico">+</span></summary>
+        <p>Send payment to JazzCash <strong>0331-862-7018</strong>, then enter the transaction reference number in the subscription form. Your account is activated within <strong>2 hours</strong> of payment verification.</p>
+      </details>
+      <details>
+        <summary>How fast will I receive an alert? <span class="faq-ico">+</span></summary>
+        <p>Pro subscribers receive alerts within <strong>1 minute</strong> of a slot opening. VIP subscribers get alerts within <strong>30 seconds</strong>. VFS slots typically disappear in 30–90 seconds, so keep your VFS login ready.</p>
+      </details>
+      <details>
+        <summary>Which countries and cities are covered? <span class="faq-ico">+</span></summary>
+        <p>We monitor <strong>UK, Italy, France, Germany, Canada, Australia, and Netherlands</strong> — all countries processed through VFS Global Pakistan. Cities covered: <strong>Lahore, Islamabad, and Karachi</strong>.</p>
+      </details>
+      <details>
+        <summary>Can I subscribe for multiple routes? <span class="faq-ico">+</span></summary>
+        <p>Yes. Pro and VIP subscribers can monitor all 7 routes simultaneously. The free trial covers UK only.</p>
+      </details>
+      <details>
+        <summary>How do I cancel or pause my subscription? <span class="faq-ico">+</span></summary>
+        <p>Reply <strong>STOP</strong> to any WhatsApp alert message and your subscription pauses immediately. Reply <strong>START</strong> to re-activate, or contact support via WhatsApp.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA band ────────────────────────────────────── -->
+<section class="cta-band">
+  <div class="wrap">
+    <h2 class="h2">Start getting alerts today</h2>
+    <p>Join hundreds of Pakistanis who never miss a VFS slot opening.</p>
+    <a href="subscribe.html" class="btn-orange">Get Started — Free Trial Available</a>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────── -->
 <footer>
-  <strong>VFS Alert PK</strong> — Not affiliated with VFS Global or any government body.<br>
-  Subscription service for slot monitoring only. &copy; 2026 VFS Alert PK
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="logo-mark">
+          <svg width="28" height="28" viewBox="0 0 34 34" fill="none"><rect width="34" height="34" rx="9" fill="#132235"/><path d="M17 6C13.7 6 11 8.7 11 12V19L9 21H25L23 19V12C23 8.7 20.3 6 17 6Z" fill="#00A855"/><path d="M14 21C14 22.7 15.3 24 17 24C18.7 24 20 22.7 20 21H14Z" fill="#00A855"/><circle cx="24" cy="9" r="5" fill="#F56A1A"/><circle cx="24" cy="9" r="2" fill="white"/></svg>
+          <span class="logo-word" style="color:rgba(228,237,244,.7)">VFS Alert <span>PK</span></span>
+        </a>
+        <p>Instant WhatsApp alerts for VFS Pakistan visa appointment slots. Not affiliated with VFS Global.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="index.html#plans">Pricing</a></li>
+          <li><a href="index.html#status">Live Status</a></li>
+          <li><a href="subscribe.html">Subscribe</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="blog.html">UK Visa Guide</a></li>
+          <li><a href="blog.html">Schengen Tips</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="contact.html">Support</a></li>
+          <li><a href="contact.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 VFS Alert PK — Not affiliated with VFS Global or any government body.</span>
+      <div style="display:flex;gap:16px">
+        <a href="contact.html">Privacy</a>
+        <a href="contact.html">Terms</a>
+      </div>
+    </div>
+  </div>
 </footer>
 
 <script>
   const WORKER_URL = 'https://vfs-alert-pk.YOUR_SUBDOMAIN.workers.dev';
-
-  const ROUTE_LABELS = {
-    'slot:pak-gbr:lahore': 'Pakistan → UK (Lahore)',
+  const ROUTE_MAP = {
+    'slot:pak-gbr:lahore':    'Pakistan → UK (Lahore)',
     'slot:pak-gbr:islamabad': 'Pakistan → UK (Islamabad)',
-    'slot:pak-gbr:karachi': 'Pakistan → UK (Karachi)',
-    'slot:pak-ita:lahore': 'Pakistan → Italy (Lahore)',
-    'slot:pak-fra:lahore': 'Pakistan → France (Lahore)',
-    'slot:pak-deu:lahore': 'Pakistan → Germany (Lahore)',
-    'slot:pak-can:lahore': 'Pakistan → Canada (Lahore)',
-    'slot:pak-aus:lahore': 'Pakistan → Australia (Lahore)',
-    'slot:pak-nld:lahore': 'Pakistan → Netherlands (Lahore)',
+    'slot:pak-gbr:karachi':   'Pakistan → UK (Karachi)',
+    'slot:pak-ita:lahore':    'Pakistan → Italy (Lahore)',
+    'slot:pak-fra:lahore':    'Pakistan → France (Lahore)',
+    'slot:pak-deu:lahore':    'Pakistan → Germany (Lahore)',
+    'slot:pak-can:lahore':    'Pakistan → Canada (Lahore)',
+    'slot:pak-aus:lahore':    'Pakistan → Australia (Lahore)',
+    'slot:pak-nld:lahore':    'Pakistan → Netherlands (Lahore)',
   };
-
   async function loadStatus() {
     const grid = document.getElementById('statusGrid');
+    const ts   = document.getElementById('termTs');
     try {
       const res = await fetch(`${WORKER_URL}/api/status`);
-      if (!res.ok) throw new Error('API error');
+      if (!res.ok) throw new Error();
       const data = await res.json();
-
-      const keys = Object.keys(data);
-      if (keys.length === 0) {
-        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:24px;">No status data yet — monitoring starts after deployment.</div>';
-        return;
-      }
-
-      grid.innerHTML = keys.map(key => {
-        const s = data[key];
-        const label = ROUTE_LABELS[key] || key.replace('slot:', '').replace(/:/g, ' — ');
-        const available = s.available;
-        return `
-          <div class="status-card">
-            <div class="status-dot ${available ? 'available' : 'unavailable'}"></div>
-            <div>
-              <div class="status-route">${label}</div>
-              <div class="status-label">${available ? '🟢 Slots Available' : '🔴 No Slots'}</div>
-            </div>
-          </div>`;
+      grid.innerHTML = Object.keys(ROUTE_MAP).map(key => {
+        const s = data[key], name = ROUTE_MAP[key];
+        if (!s) return `<div class="s-row"><span class="s-dot"></span><span class="s-name">${name}</span><span class="s-st wait">no_data</span></div>`;
+        return `<div class="s-row"><span class="s-dot ${s.available?'on':'off'}"></span><span class="s-name">${name}</span><span class="s-st ${s.available?'on':'off'}">${s.available?'AVAILABLE':'NO_SLOTS'}</span></div>`;
       }).join('');
-    } catch {
-      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:24px;">Could not load live status. Please refresh.</div>';
-    }
+      ts.textContent = 'last_check: ' + new Date().toLocaleTimeString();
+    } catch { ts.textContent = 'last_check: error — deploy worker first'; }
   }
-
   loadStatus();
   setInterval(loadStatus, 60_000);
 </script>

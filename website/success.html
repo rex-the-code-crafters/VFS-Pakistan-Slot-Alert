@@ -2,116 +2,128 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Subscription Submitted — VFS Alert PK</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #0070BA;
-      --accent: #01A550;
-      --bg: #ffffff;
-      --surface: #f8fafc;
-      --border: #e2e8f0;
-      --text: #1a202c;
-      --text-muted: #64748b;
+      --green:#00A855;--green-bg:#E6F7EE;--orange:#F56A1A;--orange-bg:#FFF0E8;
+      --ink:#0A1628;--ink2:#3D5470;--ink3:#7A90A8;
+      --bg:#F7FAF8;--surface:#FFFFFF;--border:#D4DFDA;
+      color-scheme: light;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --green:#00D668;--green-bg:rgba(0,214,104,.13);--orange:#FF7A35;--orange-bg:rgba(255,122,53,.13);
+        --ink:#E4EDF4;--ink2:#8AACCC;--ink3:#4A6A88;
+        --bg:#070E1A;--surface:#0D1B2A;--border:#1A2E44; color-scheme:dark;
+      }
+    }
+    :root[data-theme="dark"] {
+      --green:#00D668;--green-bg:rgba(0,214,104,.13);--orange:#FF7A35;--orange-bg:rgba(255,122,53,.13);
+      --ink:#E4EDF4;--ink2:#8AACCC;--ink3:#4A6A88;
+      --bg:#070E1A;--surface:#0D1B2A;--border:#1A2E44; color-scheme:dark;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Inter', sans-serif;
-      background: var(--surface);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 24px 16px;
+      font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); color: var(--ink);
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 32px 20px; -webkit-font-smoothing: antialiased;
     }
+    a { color: inherit; text-decoration: none; }
+
     .card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 40px 32px;
-      max-width: 480px;
-      width: 100%;
-      text-align: center;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 24px;
+      padding: 48px 36px; max-width: 480px; width: 100%; text-align: center;
     }
-    .icon { font-size: 3.5rem; margin-bottom: 16px; }
-    h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; }
-    .sub { color: var(--text-muted); margin-bottom: 28px; line-height: 1.6; }
-    .steps {
-      background: var(--surface);
-      border-radius: 10px;
-      padding: 20px;
-      text-align: left;
-      margin-bottom: 28px;
+    @media (max-width: 480px) { .card { padding: 36px 22px; } }
+
+    .check-ring {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--green-bg); display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 22px;
+      animation: popIn .45s cubic-bezier(.34,1.56,.64,1) both;
     }
-    .steps h3 { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
-    .step { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 0.9rem; }
-    .step-num {
-      width: 22px; height: 22px; border-radius: 50%;
-      background: var(--primary); color: #fff;
-      font-size: 0.7rem; font-weight: 700;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; margin-top: 1px;
+    @keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .check-ring svg { width: 36px; height: 36px; }
+
+    h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.7rem; letter-spacing: -.02em; margin-bottom: 8px; }
+    .sub { color: var(--ink2); margin-bottom: 30px; line-height: 1.65; }
+    .name-hi { color: var(--orange); }
+
+    .timeline { background: var(--bg); border-radius: 14px; padding: 22px 20px; text-align: left; margin-bottom: 28px; }
+    .tl-title { font-size: .72rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--ink3); margin-bottom: 16px; }
+    .tl-row { display: flex; gap: 14px; margin-bottom: 14px; align-items: flex-start; }
+    .tl-row:last-child { margin-bottom: 0; }
+    .tl-dot { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .tl-dot.done  { background: var(--green-bg); color: var(--green); }
+    .tl-dot.wait  { background: var(--orange-bg); color: var(--orange); }
+    .tl-dot.later { background: var(--border); color: var(--ink3); }
+    .tl-text { font-size: .9rem; color: var(--ink2); line-height: 1.55; }
+    .tl-text strong { color: var(--ink); font-weight: 600; }
+
+    .btns { display: flex; flex-direction: column; gap: 10px; }
+    .btn-orange {
+      display: block; text-align: center; background: var(--orange); color: #fff;
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem;
+      padding: 14px; border-radius: 100px;
+      box-shadow: 0 4px 20px rgba(245,106,26,.3);
+      transition: background .2s;
     }
-    .btn {
-      display: block;
-      background: var(--primary);
-      color: #fff;
-      padding: 14px;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: background 0.2s;
-      margin-bottom: 12px;
+    .btn-orange:hover { background: #D9560E; }
+    .btn-outline {
+      display: block; text-align: center;
+      background: transparent; color: var(--ink2); border: 1.5px solid var(--border);
+      font-weight: 600; font-size: .95rem;
+      padding: 13px; border-radius: 100px; transition: all .2s;
     }
-    .btn:hover { background: #005a94; }
-    .btn.secondary {
-      background: transparent;
-      color: var(--primary);
-      border: 2px solid var(--primary);
-    }
-    .btn.secondary:hover { background: var(--primary); color: #fff; }
-    .disclaimer { font-size: 0.75rem; color: var(--text-muted); margin-top: 20px; }
+    .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
+
+    .note { margin-top: 22px; font-size: .78rem; color: var(--ink3); }
   </style>
 </head>
 <body>
 <div class="card">
-  <div class="icon">✅</div>
+
+  <div class="check-ring">
+    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="18" fill="none"/>
+      <path d="M9 18.5L15 24.5L27 12" stroke="#00A855" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
   <h1>Submission Received!</h1>
-  <p class="sub">Thank you, <strong id="nameDisplay">subscriber</strong>! Your subscription request has been submitted. We'll verify your payment and activate your account shortly.</p>
+  <p class="sub">Thank you, <strong class="name-hi" id="nameDisplay">subscriber</strong>! Your request is confirmed. We'll verify your payment and activate your account.</p>
 
-  <div class="steps">
-    <h3>What happens next?</h3>
-    <div class="step">
-      <div class="step-num">1</div>
-      <div>We verify your JazzCash payment — usually within <strong>2 hours</strong></div>
+  <div class="timeline">
+    <div class="tl-title">What happens next</div>
+    <div class="tl-row">
+      <div class="tl-dot done">✓</div>
+      <div class="tl-text"><strong>Submitted</strong> — your request and payment reference are received.</div>
     </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div>You receive a <strong>WhatsApp confirmation</strong> message once activated</div>
+    <div class="tl-row">
+      <div class="tl-dot wait">2</div>
+      <div class="tl-text"><strong>Verification</strong> — we confirm your JazzCash payment. Usually within <strong>2 hours</strong>.</div>
     </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div>Instant slot alerts start arriving on WhatsApp as soon as slots open</div>
+    <div class="tl-row">
+      <div class="tl-dot later">3</div>
+      <div class="tl-text"><strong>WhatsApp welcome</strong> — you receive a confirmation message and alerts begin immediately.</div>
     </div>
   </div>
 
-  <a href="index.html" class="btn">Back to Home</a>
-  <a href="subscribe.html" class="btn secondary">Subscribe Another Number</a>
-
-  <div class="disclaimer">
-    Having issues? Reply to your WhatsApp confirmation message or contact support.<br>
-    VFS Alert PK — not affiliated with VFS Global.
+  <div class="btns">
+    <a href="index.html" class="btn-orange">Back to Home</a>
+    <a href="subscribe.html" class="btn-outline">Subscribe Another Number</a>
   </div>
+
+  <p class="note">Questions? Reply to your WhatsApp confirmation or visit <a href="contact.html" style="color:var(--orange)">Contact Us</a>.</p>
+
 </div>
 
 <script>
-  const params = new URLSearchParams(location.search);
-  const name = params.get('name');
-  if (name) document.getElementById('nameDisplay').textContent = name;
+  const n = new URLSearchParams(location.search).get('name');
+  if (n) document.getElementById('nameDisplay').textContent = n;
 </script>
 </body>
 </html>

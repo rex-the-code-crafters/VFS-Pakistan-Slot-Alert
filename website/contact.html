@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Contact — VFS Alert PK</title>
+  <meta name="description" content="Get in touch with VFS Alert PK. WhatsApp support, payment questions, and subscription help for Pakistani visa applicants.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green:#00A855;--green-hi:#008A44;--green-bg:#E6F7EE;
+      --orange:#F56A1A;--orange-hi:#D9560E;--orange-bg:#FFF0E8;
+      --ink:#0A1628;--ink2:#3D5470;--ink3:#7A90A8;
+      --bg:#F7FAF8;--surface:#FFFFFF;--surface2:#EEF4F1;--border:#D4DFDA;
+      --r:12px;--r-lg:20px;--r-xl:28px;
+      color-scheme:light;
+    }
+    @media(prefers-color-scheme:dark){
+      :root:not([data-theme="light"]){
+        --green:#00D668;--green-hi:#00B858;--green-bg:rgba(0,214,104,.13);
+        --orange:#FF7A35;--orange-hi:#E86420;--orange-bg:rgba(255,122,53,.13);
+        --ink:#E4EDF4;--ink2:#8AACCC;--ink3:#4A6A88;
+        --bg:#070E1A;--surface:#0D1B2A;--surface2:#132235;--border:#1A2E44;
+        color-scheme:dark;
+      }
+    }
+    :root[data-theme="dark"]{
+      --green:#00D668;--green-hi:#00B858;--green-bg:rgba(0,214,104,.13);
+      --orange:#FF7A35;--orange-hi:#E86420;--orange-bg:rgba(255,122,53,.13);
+      --ink:#E4EDF4;--ink2:#8AACCC;--ink3:#4A6A88;
+      --bg:#070E1A;--surface:#0D1B2A;--surface2:#132235;--border:#1A2E44;
+      color-scheme:dark;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased;}
+    img{max-width:100%;display:block;}
+    a{color:inherit;text-decoration:none;}
+    ul{list-style:none;}
+
+    .display{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.08;letter-spacing:-.025em;text-wrap:balance;}
+    .h2{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(1.4rem,3vw,1.9rem);letter-spacing:-.015em;text-wrap:balance;}
+    .h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;}
+    .label{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);}
+
+    .wrap{max-width:1140px;margin:0 auto;padding-inline:24px;}
+
+    /* Navbar */
+    .nav{
+      position:sticky;top:env(safe-area-inset-top,0);z-index:200;
+      background:rgba(7,14,26,.85);
+      backdrop-filter:blur(20px) saturate(160%);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav-inner{max-width:1140px;margin:0 auto;padding-inline:24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+    .nav-links{display:flex;align-items:center;gap:2px;}
+    .nav-links a{font-size:.88rem;font-weight:500;color:rgba(228,237,244,.5);padding:6px 13px;border-radius:8px;transition:color .2s,background .2s;}
+    .nav-links a:hover{color:rgba(228,237,244,.9);background:rgba(255,255,255,.06);}
+    @media(max-width:640px){.nav-links{display:none;}}
+    .logo-mark{display:flex;align-items:center;gap:10px;}
+    .logo-word{font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;line-height:1;}
+    .logo-word span{color:var(--orange);}
+    .nav-cta{
+      background:var(--orange);color:#fff;
+      font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;
+      padding:9px 22px;border-radius:100px;
+      box-shadow:0 0 24px rgba(245,106,26,.4);
+      transition:background .2s,box-shadow .2s,transform .15s;white-space:nowrap;
+    }
+    .nav-cta:hover{background:var(--orange-hi);transform:translateY(-1px);}
+
+    /* Page hero */
+    .page-hero{
+      background:#070E1A;color:#E4EDF4;
+      padding-block:72px 64px;position:relative;overflow:hidden;
+    }
+    .page-hero::before{
+      content:'';position:absolute;inset:0;pointer-events:none;
+      background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);
+      background-size:28px 28px;
+      mask-image:radial-gradient(ellipse 70% 80% at 30% 50%,black 20%,transparent 100%);
+    }
+    .page-hero::after{
+      content:'';position:absolute;inset:0;pointer-events:none;
+      background:
+        radial-gradient(ellipse 60% 50% at 10% 0%,rgba(0,168,85,.2) 0%,transparent 65%),
+        radial-gradient(ellipse 45% 40% at 85% 100%,rgba(245,106,26,.16) 0%,transparent 60%);
+    }
+    .page-hero-inner{position:relative;z-index:1;max-width:1140px;margin:0 auto;padding-inline:24px;}
+    .page-hero .label{color:rgba(228,237,244,.35);margin-bottom:12px;display:block;}
+    .page-hero .display{color:#fff;margin-bottom:14px;}
+    .page-hero .display .hi{
+      background:linear-gradient(115deg,#00D668,#F56A1A);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    .page-hero p{font-size:1.05rem;color:rgba(228,237,244,.55);max-width:500px;line-height:1.7;}
+
+    /* Main layout */
+    .contact-layout{
+      max-width:1140px;margin:0 auto;padding-inline:24px;
+      display:grid;grid-template-columns:1fr 1.1fr;gap:48px;
+      padding-block:72px;
+    }
+    @media(max-width:860px){.contact-layout{grid-template-columns:1fr;gap:40px;}}
+
+    /* Left sidebar */
+    .contact-sidebar{display:flex;flex-direction:column;gap:20px;}
+
+    .info-card{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--r-lg);padding:26px 24px;
+    }
+    .info-card-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:6px;}
+    .info-icon{
+      width:42px;height:42px;border-radius:11px;flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .ii-green{background:var(--green-bg);}
+    .ii-orange{background:var(--orange-bg);}
+    .ii-dark{background:var(--surface2);}
+    .info-icon svg{width:20px;height:20px;}
+    .info-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:2px;}
+    .info-sub{font-size:.82rem;color:var(--ink3);}
+    .info-value{
+      font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;
+      color:var(--ink);margin-top:12px;margin-left:56px;
+    }
+    .info-desc{font-size:.85rem;color:var(--ink2);margin-top:4px;margin-left:56px;line-height:1.6;}
+    .info-action{
+      display:inline-flex;align-items:center;gap:7px;margin-top:10px;margin-left:56px;
+      font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;
+      background:var(--green);color:#fff;
+      padding:8px 18px;border-radius:100px;
+      box-shadow:0 2px 14px rgba(0,168,85,.3);
+      transition:background .2s,transform .15s;
+    }
+    .info-action:hover{background:var(--green-hi);transform:translateY(-1px);}
+    .info-action.orange{background:var(--orange);box-shadow:0 2px 14px rgba(245,106,26,.3);}
+    .info-action.orange:hover{background:var(--orange-hi);}
+
+    /* Response time badge */
+    .response-badge{
+      display:inline-flex;align-items:center;gap:8px;
+      background:var(--green-bg);border:1px solid rgba(0,168,85,.2);
+      border-radius:100px;padding:5px 14px;
+      font-size:.78rem;font-weight:600;color:var(--green);
+      margin-top:12px;margin-left:56px;
+    }
+    .pulse{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;position:relative;}
+    .pulse::after{content:'';position:absolute;inset:-3px;border-radius:50%;background:rgba(0,168,85,.4);animation:ripple 1.8s ease-out infinite;}
+    @keyframes ripple{to{transform:scale(2.5);opacity:0;}}
+
+    /* Quick help */
+    .quick-help{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 24px;}
+    .quick-help-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;margin-bottom:16px;}
+    .faq-mini{display:flex;flex-direction:column;gap:0;}
+    .faq-mini details{border-bottom:1px solid var(--border);}
+    .faq-mini details:last-child{border-bottom:none;}
+    .faq-mini summary{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:14px 0;cursor:pointer;list-style:none;
+      font-size:.87rem;font-weight:600;gap:12px;
+    }
+    .faq-mini summary::-webkit-details-marker{display:none;}
+    .faq-mini .fi{
+      flex-shrink:0;width:20px;height:20px;border-radius:50%;
+      background:var(--surface2);color:var(--ink3);
+      display:flex;align-items:center;justify-content:center;font-size:.82rem;
+      transition:transform .2s,background .2s,color .2s;
+    }
+    .faq-mini details[open] .fi{transform:rotate(45deg);background:var(--orange-bg);color:var(--orange);}
+    .faq-mini details p{padding-bottom:14px;font-size:.84rem;color:var(--ink2);line-height:1.65;}
+    .faq-mini details p strong{color:var(--ink);}
+
+    /* Right: form */
+    .contact-form-wrap{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--r-xl);padding:40px 36px;
+    }
+    @media(max-width:480px){.contact-form-wrap{padding:28px 20px;}}
+
+    .form-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.45rem;margin-bottom:6px;}
+    .form-sub{font-size:.92rem;color:var(--ink2);margin-bottom:32px;line-height:1.6;}
+
+    .form-group{margin-bottom:20px;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+    @media(max-width:500px){.form-row{grid-template-columns:1fr;}}
+
+    label{display:block;font-size:.82rem;font-weight:600;color:var(--ink2);margin-bottom:7px;letter-spacing:.01em;}
+    input[type="text"],input[type="email"],input[type="tel"],select,textarea{
+      width:100%;background:var(--bg);color:var(--ink);
+      border:1.5px solid var(--border);border-radius:var(--r);
+      padding:11px 14px;font-family:inherit;font-size:.92rem;
+      transition:border-color .2s,box-shadow .2s;
+      outline:none;appearance:none;
+    }
+    input:focus,select:focus,textarea:focus{
+      border-color:var(--orange);
+      box-shadow:0 0 0 3px rgba(245,106,26,.12);
+    }
+    textarea{resize:vertical;min-height:120px;line-height:1.6;}
+    select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%237A90A8' stroke-width='2' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px;}
+
+    .type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+    @media(max-width:400px){.type-grid{grid-template-columns:1fr;}}
+    .type-opt{
+      display:none;
+    }
+    .type-label{
+      display:flex;flex-direction:column;gap:3px;
+      border:1.5px solid var(--border);border-radius:var(--r);
+      padding:12px 14px;cursor:pointer;
+      transition:border-color .2s,background .2s;
+    }
+    .type-label:hover{border-color:var(--orange);background:var(--orange-bg);}
+    .type-opt:checked+.type-label{border-color:var(--orange);background:var(--orange-bg);}
+    .type-name{font-weight:600;font-size:.88rem;}
+    .type-desc{font-size:.76rem;color:var(--ink3);}
+    .type-opt:checked+.type-label .type-name{color:var(--orange);}
+    .type-opt:checked+.type-label .type-desc{color:var(--orange-hi);opacity:.7;}
+
+    .submit-btn{
+      width:100%;display:block;text-align:center;
+      background:var(--orange);color:#fff;border:none;cursor:pointer;
+      font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;
+      padding:14px;border-radius:100px;
+      box-shadow:0 2px 24px rgba(245,106,26,.35);
+      transition:background .2s,transform .15s,box-shadow .2s;
+      margin-top:28px;
+    }
+    .submit-btn:hover{background:var(--orange-hi);transform:translateY(-2px);box-shadow:0 6px 32px rgba(245,106,26,.5);}
+    .submit-btn:disabled{opacity:.55;transform:none;cursor:not-allowed;}
+
+    .form-note{font-size:.79rem;color:var(--ink3);text-align:center;margin-top:14px;line-height:1.5;}
+
+    .success-banner{
+      display:none;
+      background:var(--green-bg);border:1px solid rgba(0,168,85,.25);
+      border-radius:var(--r);padding:16px 18px;
+      font-size:.9rem;color:var(--green);font-weight:600;
+      margin-top:16px;text-align:center;
+    }
+    .error-banner{
+      display:none;
+      background:var(--orange-bg);border:1px solid rgba(245,106,26,.25);
+      border-radius:var(--r);padding:14px 18px;
+      font-size:.88rem;color:var(--orange);
+      margin-bottom:20px;
+    }
+
+    /* WhatsApp CTA band */
+    .wa-band{
+      background:#0A1628;padding-block:56px;text-align:center;
+      position:relative;overflow:hidden;
+    }
+    .wa-band::before{
+      content:'';position:absolute;inset:0;pointer-events:none;
+      background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(37,211,102,.1) 0%,transparent 70%);
+    }
+    .wa-band h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.4rem,3vw,2rem);color:#fff;margin-bottom:10px;position:relative;}
+    .wa-band p{color:rgba(228,237,244,.5);margin-bottom:28px;position:relative;font-size:.97rem;}
+    .wa-btn-big{
+      display:inline-flex;align-items:center;gap:10px;position:relative;
+      background:#25D366;color:#fff;
+      font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;
+      padding:14px 32px;border-radius:100px;
+      box-shadow:0 4px 28px rgba(37,211,102,.4);
+      transition:background .2s,transform .15s,box-shadow .2s;
+    }
+    .wa-btn-big:hover{background:#1ebe58;transform:translateY(-2px);box-shadow:0 8px 36px rgba(37,211,102,.55);}
+
+    /* Footer */
+    footer{background:#060C18;color:rgba(228,237,244,.4);padding-block:52px 32px;}
+    .footer-inner{max-width:1140px;margin:0 auto;padding-inline:24px;}
+    .footer-top{
+      display:grid;grid-template-columns:2fr repeat(3,1fr);gap:48px;
+      padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:28px;
+    }
+    @media(max-width:760px){.footer-top{grid-template-columns:1fr 1fr;}}
+    @media(max-width:440px){.footer-top{grid-template-columns:1fr;}}
+    .footer-brand p{font-size:.87rem;margin-top:14px;line-height:1.7;max-width:240px;}
+    .footer-col h4{font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;color:rgba(228,237,244,.75);margin-bottom:16px;letter-spacing:.04em;text-transform:uppercase;}
+    .footer-col ul{display:flex;flex-direction:column;gap:9px;}
+    .footer-col a{font-size:.84rem;transition:color .2s;}
+    .footer-col a:hover{color:var(--orange);}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.79rem;}
+    .footer-bottom a{color:rgba(228,237,244,.3);transition:color .2s;}
+    .footer-bottom a:hover{color:var(--orange);}
+
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important;}}
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo-mark">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+        <rect width="34" height="34" rx="9" fill="#0A1628"/>
+        <path d="M17 6C13.7 6 11 8.7 11 12V19L9 21H25L23 19V12C23 8.7 20.3 6 17 6Z" fill="#00A855"/>
+        <path d="M14 21C14 22.7 15.3 24 17 24C18.7 24 20 22.7 20 21H14Z" fill="#00A855"/>
+        <circle cx="24" cy="9" r="5" fill="#F56A1A"/>
+        <circle cx="24" cy="9" r="2" fill="white"/>
+      </svg>
+      <span class="logo-word" style="color:#E4EDF4">VFS Alert <span>PK</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#plans">Plans</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html" style="color:rgba(228,237,244,.9)">Contact</a>
+    </div>
+    <a href="subscribe.html" class="nav-cta">Subscribe Now</a>
+  </div>
+</nav>
+
+<!-- Page hero -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="label">Get in Touch</span>
+    <h1 class="display">We're here to <span class="hi">help you</span></h1>
+    <p>Questions about your subscription, payment confirmation, or visa advice — reach us directly on WhatsApp or send a message below.</p>
+  </div>
+</section>
+
+<!-- Main contact layout -->
+<div class="contact-layout">
+
+  <!-- Left sidebar: contact info + quick FAQ -->
+  <div class="contact-sidebar">
+
+    <!-- WhatsApp support -->
+    <div class="info-card">
+      <div class="info-card-header">
+        <div class="info-icon ii-green">
+          <svg viewBox="0 0 24 24" fill="#00A855"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.7-.8-2.8-1.5-3.9-3.4-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5-.1-.1-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.1 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.1-1.4-.1-.2-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.2L2 22l5-1.3C8.5 21.5 10.2 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.2-.4-4.6-1.2l-.3-.2-3 .8.8-2.9-.2-.3c-.8-1.4-1.3-3-1.3-4.7 0-4.6 3.7-8.3 8.3-8.3 4.6 0 8.3 3.7 8.3 8.3.2 4.6-3.5 8.5-8 8.5z"/></svg>
+        </div>
+        <div>
+          <div class="info-title">WhatsApp Support</div>
+          <div class="info-sub">Fastest way to reach us</div>
+        </div>
+      </div>
+      <div class="info-value">0331-862-7018</div>
+      <div class="info-desc">Send us a WhatsApp message for subscription help, payment confirmation queries, or any issue with your alerts.</div>
+      <div class="response-badge"><span class="pulse"></span>Typically replies within 2 hours</div>
+    </div>
+
+    <!-- Payment questions -->
+    <div class="info-card">
+      <div class="info-card-header">
+        <div class="info-icon ii-orange">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <div>
+          <div class="info-title">JazzCash Payments</div>
+          <div class="info-sub">Payment number</div>
+        </div>
+      </div>
+      <div class="info-value">0331-862-7018</div>
+      <div class="info-desc">Send your subscription fee to this JazzCash number. Include your WhatsApp number in the payment note. We verify within 2 hours.</div>
+    </div>
+
+    <!-- Response hours -->
+    <div class="info-card">
+      <div class="info-card-header">
+        <div class="info-icon ii-dark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--ink2)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <div class="info-title">Support Hours</div>
+          <div class="info-sub">When we're available</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;margin-left:56px;display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;justify-content:space-between;font-size:.85rem;">
+          <span style="color:var(--ink2);">Mon – Fri</span>
+          <span style="font-weight:600;">9am – 10pm PKT</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:.85rem;">
+          <span style="color:var(--ink2);">Sat – Sun</span>
+          <span style="font-weight:600;">10am – 8pm PKT</span>
+        </div>
+        <div style="height:1px;background:var(--border);margin:4px 0;"></div>
+        <div style="font-size:.82rem;color:var(--ink3);">Monitoring runs <strong style="color:var(--ink);">24/7</strong> — slot alerts are automatic regardless of support hours.</div>
+      </div>
+    </div>
+
+    <!-- Quick FAQ -->
+    <div class="quick-help">
+      <div class="quick-help-title">Quick answers</div>
+      <div class="faq-mini">
+        <details>
+          <summary>My payment isn't confirmed yet <span class="fi">+</span></summary>
+          <p>Verification usually takes under <strong>2 hours</strong>. If it's been longer, WhatsApp us at <strong>0331-862-7018</strong> with your transaction ID and we'll check immediately.</p>
+        </details>
+        <details>
+          <summary>I'm not receiving alerts <span class="fi">+</span></summary>
+          <p>Check that you haven't blocked our number. Reply <strong>START</strong> to our WhatsApp number to re-activate. If slots are genuinely unavailable, the monitor shows <strong>NO_SLOTS</strong> — that's accurate, not a bug.</p>
+        </details>
+        <details>
+          <summary>How do I cancel my subscription? <span class="fi">+</span></summary>
+          <p>Reply <strong>STOP</strong> to any alert WhatsApp message. Your alerts will pause immediately. Reply <strong>START</strong> to resume at any time.</p>
+        </details>
+        <details>
+          <summary>Can I change my monitored route? <span class="fi">+</span></summary>
+          <p>Yes — WhatsApp us your new route preference and we'll update your subscription within the hour.</p>
+        </details>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Right: contact form -->
+  <div>
+    <div class="contact-form-wrap">
+      <div class="form-title">Send us a message</div>
+      <div class="form-sub">Fill in the form and we'll reply on WhatsApp or email within 2 hours during support hours.</div>
+
+      <div class="error-banner" id="errBanner"></div>
+
+      <form id="contactForm" novalidate>
+        <div class="form-row">
+          <div>
+            <label for="fname">First name</label>
+            <input type="text" id="fname" name="fname" placeholder="Ahmed" autocomplete="given-name" required>
+          </div>
+          <div>
+            <label for="lname">Last name</label>
+            <input type="text" id="lname" name="lname" placeholder="Khan" autocomplete="family-name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="whatsapp">WhatsApp number</label>
+          <input type="tel" id="whatsapp" name="whatsapp" placeholder="0300-1234567" autocomplete="tel" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email address <span style="color:var(--ink3);font-weight:400">(optional)</span></label>
+          <input type="email" id="email" name="email" placeholder="ahmed@example.com" autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label>What do you need help with?</label>
+          <div class="type-grid">
+            <div>
+              <input type="radio" class="type-opt" id="t1" name="topic" value="Payment confirmation" checked>
+              <label class="type-label" for="t1">
+                <span class="type-name">💳 Payment</span>
+                <span class="type-desc">JazzCash verification</span>
+              </label>
+            </div>
+            <div>
+              <input type="radio" class="type-opt" id="t2" name="topic" value="Subscription / alerts">
+              <label class="type-label" for="t2">
+                <span class="type-name">🔔 Alerts</span>
+                <span class="type-desc">Subscription issue</span>
+              </label>
+            </div>
+            <div>
+              <input type="radio" class="type-opt" id="t3" name="topic" value="Technical issue">
+              <label class="type-label" for="t3">
+                <span class="type-name">⚙️ Technical</span>
+                <span class="type-desc">Not receiving alerts</span>
+              </label>
+            </div>
+            <div>
+              <input type="radio" class="type-opt" id="t4" name="topic" value="General question">
+              <label class="type-label" for="t4">
+                <span class="type-name">💬 General</span>
+                <span class="type-desc">Other question</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Describe your question or issue in detail…" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+        <div class="success-banner" id="successBanner">✓ Message received! We'll reply on WhatsApp within 2 hours.</div>
+        <p class="form-note">By sending this message you agree that we may contact you via the WhatsApp number provided.</p>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<!-- WhatsApp CTA -->
+<section class="wa-band">
+  <div class="wrap">
+    <h2>Prefer to chat directly?</h2>
+    <p>WhatsApp is the fastest way to get support — we respond to every message.</p>
+    <a href="https://wa.me/923318627018" target="_blank" rel="noopener" class="wa-btn-big">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.7-.8-2.8-1.5-3.9-3.4-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5-.1-.1-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.1 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.1-1.4-.1-.2-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.2L2 22l5-1.3C8.5 21.5 10.2 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.2-.4-4.6-1.2l-.3-.2-3 .8.8-2.9-.2-.3c-.8-1.4-1.3-3-1.3-4.7 0-4.6 3.7-8.3 8.3-8.3 4.6 0 8.3 3.7 8.3 8.3.2 4.6-3.5 8.5-8 8.5z"/></svg>
+      Message us on WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="logo-mark">
+          <svg width="28" height="28" viewBox="0 0 34 34" fill="none"><rect width="34" height="34" rx="9" fill="#132235"/><path d="M17 6C13.7 6 11 8.7 11 12V19L9 21H25L23 19V12C23 8.7 20.3 6 17 6Z" fill="#00A855"/><path d="M14 21C14 22.7 15.3 24 17 24C18.7 24 20 22.7 20 21H14Z" fill="#00A855"/><circle cx="24" cy="9" r="5" fill="#F56A1A"/><circle cx="24" cy="9" r="2" fill="white"/></svg>
+          <span class="logo-word" style="color:rgba(228,237,244,.7)">VFS Alert <span>PK</span></span>
+        </a>
+        <p>Instant WhatsApp alerts for VFS Pakistan visa appointment slots. Not affiliated with VFS Global.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="index.html#plans">Pricing</a></li>
+          <li><a href="index.html#status">Live Status</a></li>
+          <li><a href="subscribe.html">Subscribe</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="blog.html">UK Visa Guide</a></li>
+          <li><a href="blog.html">Schengen Tips</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="contact.html">Support</a></li>
+          <li><a href="contact.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 VFS Alert PK — Not affiliated with VFS Global or any government body.</span>
+      <div style="display:flex;gap:16px">
+        <a href="contact.html">Privacy</a>
+        <a href="contact.html">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const form = document.getElementById('contactForm');
+  const btn  = document.getElementById('submitBtn');
+  const succ = document.getElementById('successBanner');
+  const err  = document.getElementById('errBanner');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    err.style.display = 'none';
+
+    const fname = document.getElementById('fname').value.trim();
+    const wa    = document.getElementById('whatsapp').value.trim();
+    const msg   = document.getElementById('message').value.trim();
+
+    if (!fname) { showErr('Please enter your first name.'); return; }
+    if (!wa)    { showErr('Please enter your WhatsApp number.'); return; }
+    if (!msg)   { showErr('Please enter your message.'); return; }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    setTimeout(() => {
+      succ.style.display = 'block';
+      btn.style.display = 'none';
+      form.querySelectorAll('input,textarea,select').forEach(el => el.disabled = true);
+    }, 900);
+  });
+
+  function showErr(msg) {
+    err.textContent = msg;
+    err.style.display = 'block';
+    err.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
+</body>
+</html>
