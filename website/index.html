@@ -295,6 +295,68 @@
     }
     @media (max-width: 700px) { .step-arrow { display: none; } }
 
+    /* ── Phone mockup section ───────────────────── */
+    .phone-sec { background: #070E1A; padding-block: 96px; position: relative; overflow: hidden; }
+    .phone-sec::before { content: ''; position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px); background-size: 28px 28px; mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 0%, transparent 100%); }
+    .phone-sec::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 55% 50% at 10% 110%, rgba(0,168,85,.22) 0%, transparent 65%), radial-gradient(ellipse 45% 40% at 90% -10%, rgba(245,106,26,.18) 0%, transparent 60%); }
+    .phone-sec-inner { position: relative; z-index: 1; max-width: 1140px; margin: 0 auto; padding-inline: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    @media (max-width: 860px) { .phone-sec-inner { grid-template-columns: 1fr; text-align: center; gap: 52px; } }
+    .phone-sec-text .label { display: block; margin-bottom: 14px; color: rgba(228,237,244,.38); }
+    .phone-sec-text .h2 { color: #E4EDF4; margin-bottom: 18px; }
+    .phone-sec-text > p { color: rgba(228,237,244,.52); font-size: 1.03rem; line-height: 1.75; margin-bottom: 36px; }
+    .phone-steps { display: flex; flex-direction: column; gap: 18px; }
+    @media (max-width: 860px) { .phone-steps { align-items: center; } }
+    .ps-item { display: flex; align-items: flex-start; gap: 14px; max-width: 420px; }
+    .ps-num { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; font-size: .78rem; background: linear-gradient(135deg, rgba(0,168,85,.18), rgba(0,168,85,.06)); border: 1px solid rgba(0,168,85,.3); color: #00D668; }
+    .ps-item h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .92rem; color: rgba(228,237,244,.9); margin-bottom: 3px; }
+    .ps-item p { color: rgba(228,237,244,.4); font-size: .83rem; line-height: 1.55; margin: 0; }
+    .phone-wrap { display: flex; justify-content: center; align-items: center; }
+    @media (max-width: 860px) { .phone-wrap { order: -1; } }
+    .phone-frame { position: relative; width: 270px; margin: 0 auto; }
+    .phone-device { background: linear-gradient(160deg, #1A2030, #0D1218); border-radius: 48px; border: 2px solid rgba(255,255,255,.12); box-shadow: 0 48px 96px rgba(0,0,0,.75), 0 0 0 1px rgba(255,255,255,.04), inset 0 1px 0 rgba(255,255,255,.1); overflow: hidden; padding: 56px 10px 14px; position: relative; }
+    .phone-device::before { content: ''; position: absolute; top: 16px; left: 50%; transform: translateX(-50%); width: 88px; height: 28px; background: #000; border-radius: 22px; z-index: 10; }
+    .phone-device::after { content: ''; position: absolute; right: -3px; top: 100px; width: 3px; height: 56px; background: rgba(255,255,255,.08); border-radius: 0 3px 3px 0; }
+    .phone-screen { background: #ECE5DD; border-radius: 24px; overflow: hidden; height: 490px; display: flex; flex-direction: column; }
+    .wa-bar { background: #128C7E; padding: 10px 12px 9px; display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+    .wa-back { color: rgba(255,255,255,.75); font-size: 1rem; font-weight: 300; }
+    .wa-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #00A855, #0D6B3C); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1rem; }
+    .wa-info { flex: 1; }
+    .wa-name { font-size: .78rem; font-weight: 700; color: #fff; }
+    .wa-online { font-size: .62rem; color: rgba(255,255,255,.7); }
+    .wa-dots { color: rgba(255,255,255,.6); font-size: 1.1rem; }
+    .wa-chat { flex: 1; padding: 10px 8px 8px; display: flex; flex-direction: column; gap: 5px; overflow: hidden; position: relative; }
+    .wa-chat::before { content: ''; position: absolute; inset: 0; opacity: .035; background-image: radial-gradient(circle, #000 1px, transparent 1px); background-size: 18px 18px; }
+    .wa-date-sep { text-align: center; font-size: .59rem; color: rgba(0,0,0,.5); background: rgba(255,255,255,.75); padding: 3px 12px; border-radius: 100px; align-self: center; margin-block: 3px; z-index: 1; }
+    .wa-msg { max-width: 86%; border-radius: 8px; padding: 7px 9px 4px; font-size: .68rem; line-height: 1.48; position: relative; z-index: 1; opacity: 0; animation: bubbleIn .45s ease forwards; }
+    @keyframes bubbleIn { from { opacity: 0; transform: scale(.88) translateY(7px) } to { opacity: 1; transform: none } }
+    .wa-msg-in { background: #fff; align-self: flex-start; border-radius: 0 8px 8px 8px; color: #222; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+    .wa-msg-out { background: #DCF8C6; align-self: flex-end; border-radius: 8px 0 8px 8px; color: #1a1a1a; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+    .wa-msg-time { font-size: .56rem; color: rgba(0,0,0,.38); display: block; text-align: right; margin-top: 3px; }
+    .wa-msg.alert-msg { background: #fff; border-left: 3px solid #F56A1A; border-radius: 0 8px 8px 8px; }
+    .alert-header { font-size: .68rem; font-weight: 800; color: #F56A1A; letter-spacing: .04em; margin-bottom: 5px; display: flex; align-items: center; gap: 4px; }
+    .alert-blink { display: inline-block; animation: alertPop .6s ease 2s both; }
+    @keyframes alertPop { 0%,100% { transform: scale(1) } 40% { transform: scale(1.25) } }
+    .alert-body-title { font-size: .8rem; font-weight: 700; color: #111; margin-bottom: 4px; }
+    .alert-detail { font-size: .67rem; color: #555; line-height: 1.6; }
+    .alert-cta-btn { display: block; background: linear-gradient(135deg, #F56A1A, #D9560E); color: #fff; text-align: center; font-weight: 700; font-size: .68rem; padding: 7px 8px; border-radius: 7px; margin-top: 8px; letter-spacing: .02em; }
+    .wa-typing { display: flex; gap: 4px; padding: 8px 11px; background: #fff; border-radius: 0 8px 8px 8px; align-self: flex-start; width: fit-content; box-shadow: 0 1px 2px rgba(0,0,0,.06); z-index: 1; animation: bubbleIn .3s ease 3.2s both; }
+    .wa-typing span { width: 6px; height: 6px; border-radius: 50%; background: #bbb; animation: tdots 1.3s ease-in-out infinite; }
+    .wa-typing span:nth-child(2) { animation-delay: .22s; }
+    .wa-typing span:nth-child(3) { animation-delay: .44s; }
+    @keyframes tdots { 0%,60%,100% { transform: translateY(0); background: #bbb } 30% { transform: translateY(-5px); background: #888 } }
+    .slot-flash { animation: slotFlash .8s ease 1.5s both; }
+    @keyframes slotFlash { 0% { box-shadow: 0 0 0 rgba(245,106,26,0) } 50% { box-shadow: 0 0 20px rgba(245,106,26,.5) } 100% { box-shadow: none } }
+    .ph-chip { position: absolute; z-index: 5; background: rgba(10,20,36,.97); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 10px 14px; box-shadow: 0 10px 32px rgba(0,0,0,.55); }
+    .ph-chip-a { top: 14%; right: -52px; animation: floatUp 4.2s ease-in-out infinite .4s; }
+    .ph-chip-b { bottom: 22%; left: -58px; animation: floatUp 4.8s ease-in-out infinite 1.1s; }
+    .ph-chip .pch-label { font-size: .6rem; color: rgba(228,237,244,.35); text-transform: uppercase; letter-spacing: .09em; margin-bottom: 3px; }
+    .ph-chip .pch-val { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.15rem; color: #00D668; line-height: 1; }
+    .ph-chip .pch-unit { font-size: .65rem; color: rgba(228,237,244,.4); margin-top: 1px; }
+    .ph-chip-b .pch-icon { font-size: 1.3rem; margin-bottom: 4px; display: block; }
+    .ph-chip-b .pch-text strong { display: block; font-family: 'Syne', sans-serif; font-weight: 700; font-size: .78rem; color: rgba(228,237,244,.88); }
+    .ph-chip-b .pch-text span { font-size: .67rem; color: rgba(228,237,244,.4); }
+    @media (max-width: 860px) { .ph-chip-a { right: -10px; top: 8%; } .ph-chip-b { left: -10px; bottom: 8%; } }
+
     /* ── Bento features ─────────────────────────── */
     .bento { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
     @media (max-width: 860px) { .bento { grid-template-columns: 1fr 1fr; } }
@@ -691,6 +753,96 @@
         <div class="step-n">03</div>
         <h3 class="h3">Receive Instant Alerts</h3>
         <p>The moment a slot opens, you get a WhatsApp message with the booking link — day or night, within 60 seconds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Phone mockup — What you'll receive ─────────── -->
+<section class="phone-sec">
+  <div class="phone-sec-inner">
+    <div class="phone-sec-text">
+      <span class="label">The Experience</span>
+      <h2 class="h2">What lands on your <span class="grad-text">WhatsApp</span></h2>
+      <p>The moment a VFS slot opens, you get a clear, actionable message. No noise, no spam — just the alert you've been waiting for.</p>
+      <div class="phone-steps">
+        <div class="ps-item">
+          <div class="ps-num">1</div>
+          <div><h4>Instant notification arrives</h4><p>WhatsApp message lands within 30–60 seconds of a slot opening on VFS Global.</p></div>
+        </div>
+        <div class="ps-item">
+          <div class="ps-num">2</div>
+          <div><h4>Route + city clearly shown</h4><p>Which country, which VFS centre, and how many dates are available — all in one message.</p></div>
+        </div>
+        <div class="ps-item">
+          <div class="ps-num">3</div>
+          <div><h4>One tap to book</h4><p>The booking link goes straight to the VFS appointment page. No searching, no wasted seconds.</p></div>
+        </div>
+        <div class="ps-item">
+          <div class="ps-num">4</div>
+          <div><h4>No app or account needed</h4><p>Everything happens inside your existing WhatsApp. Zero downloads, zero dashboards.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phone-wrap">
+      <div class="phone-frame">
+        <div class="phone-device">
+          <div class="phone-screen">
+            <div class="wa-bar">
+              <span class="wa-back">‹</span>
+              <div class="wa-avatar">🔔</div>
+              <div class="wa-info">
+                <div class="wa-name">VFS Alert PK</div>
+                <div class="wa-online">online</div>
+              </div>
+              <span class="wa-dots">⋮</span>
+            </div>
+            <div class="wa-chat">
+              <div class="wa-date-sep">Today</div>
+              <div class="wa-msg wa-msg-in" style="animation-delay:.3s">
+                ✅ <strong>Subscription Activated</strong><br>
+                Monitoring <strong>UK + Italy</strong> in <strong>Lahore</strong>. You'll get an alert the moment a slot opens.
+                <span class="wa-msg-time">09:14 ✓✓</span>
+              </div>
+              <div class="wa-msg wa-msg-in" style="animation-delay:.7s">
+                🔄 <strong>Check #142</strong> — no slots yet<br>
+                <span style="color:#888;font-size:.63rem">UK Lahore · Italy Lahore · still watching</span>
+                <span class="wa-msg-time">11:30 ✓✓</span>
+              </div>
+              <div class="wa-msg alert-msg slot-flash" style="animation-delay:1.1s">
+                <div class="alert-header"><span class="alert-blink">🚨</span> SLOT AVAILABLE</div>
+                <div class="alert-body-title">Pakistan → UK Visa</div>
+                <div class="alert-detail">
+                  📍 Lahore VFS Centre<br>
+                  📅 3 dates available<br>
+                  ⚡ Act fast — slots fill fast
+                </div>
+                <div class="alert-cta-btn">Tap to Book Appointment →</div>
+                <span class="wa-msg-time">14:07 ✓</span>
+              </div>
+              <div class="wa-msg wa-msg-out" style="animation-delay:1.6s">
+                Got it! Booking now 🙏
+                <span class="wa-msg-time">14:07 ✓✓</span>
+              </div>
+              <div class="wa-typing">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ph-chip ph-chip-a">
+          <div class="pch-label">Alert speed</div>
+          <div class="pch-val">1.8s</div>
+          <div class="pch-unit">avg delivery</div>
+        </div>
+        <div class="ph-chip ph-chip-b">
+          <span class="pch-icon">📲</span>
+          <div class="pch-text">
+            <strong>WhatsApp only</strong>
+            <span>No app to install</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
