@@ -10,12 +10,12 @@ browser = { binding = "MYBROWSER" }
 [[d1_databases]]
 binding = "DB"
 database_name = "vfs-alert-db"
-database_id = "REPLACE_WITH_YOUR_D1_ID"  # Run: wrangler d1 create vfs-alert-db
+database_id = "2ffde052-e5a5-40af-aa1e-353c38a179e7"  # Run: wrangler d1 create vfs-alert-db
 
 # KV Namespace for slot state
 [[kv_namespaces]]
 binding = "SLOT_STATE"
-id = "REPLACE_WITH_YOUR_KV_ID"  # Run: wrangler kv:namespace create SLOT_STATE
+id = "3dc020ab2bcc4c5c8395b2a5a34fb0b7"  # Run: wrangler kv:namespace create SLOT_STATE
 
 # Cron: every 1 minute
 [triggers]
