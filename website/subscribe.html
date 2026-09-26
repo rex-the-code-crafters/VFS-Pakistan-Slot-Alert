@@ -140,11 +140,6 @@
     .dur-save { font-size: .7rem; color: var(--green); font-weight: 600; margin-top: 2px; }
 
     /* Payment card */
-    .payment-card {
-      display: none; background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--r-lg); padding: 28px 24px; margin-bottom: 18px;
-    }
-    .payment-card.show { display: block; }
     .jazzcash-box {
       background: linear-gradient(135deg, var(--orange-bg), rgba(245,106,26,.05));
       border: 1.5px solid rgba(245,106,26,.3);
@@ -155,16 +150,30 @@
     .jc-num { font-family: 'DM Sans', sans-serif; font-size: 1.2rem; font-weight: 600; letter-spacing: .06em; color: var(--ink); margin-top: 6px; }
     .jc-hint { font-size: .8rem; color: var(--ink3); margin-top: 6px; }
 
-    /* Submit */
-    .submit-area { margin-top: 4px; }
-    .btn-submit {
-      width: 100%; background: var(--orange); color: #fff;
+    /* Step panels */
+    .step-panel { display: none; }
+    .step-panel.active { display: block; }
+
+    /* Step nav buttons */
+    .step-nav {
+      display: flex; gap: 12px; margin-top: 8px;
+    }
+    .btn-back {
+      flex: 0 0 auto; padding: 14px 24px;
+      background: transparent; color: var(--ink2);
+      border: 1.5px solid var(--border); border-radius: 100px;
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem;
+      transition: all .2s;
+    }
+    .btn-back:hover { border-color: var(--ink3); color: var(--ink); }
+    .btn-next, .btn-submit {
+      flex: 1; background: var(--orange); color: #fff;
       font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem;
       padding: 15px; border: none; border-radius: 100px;
       box-shadow: 0 4px 20px rgba(245,106,26,.35);
       transition: background .2s, transform .15s, box-shadow .2s;
     }
-    .btn-submit:hover { background: var(--orange-hi); transform: translateY(-1px); box-shadow: 0 6px 28px rgba(245,106,26,.45); }
+    .btn-next:hover, .btn-submit:hover { background: var(--orange-hi); transform: translateY(-1px); box-shadow: 0 6px 28px rgba(245,106,26,.45); }
     .btn-submit:disabled { opacity: .6; transform: none; cursor: not-allowed; }
 
     .err-banner {
@@ -177,6 +186,14 @@
 
     .disclaimer { text-align: center; font-size: .78rem; color: var(--ink3); margin-top: 14px; }
     .disclaimer a { color: var(--orange); }
+
+    /* Step summary bar (step 3) */
+    .summary-bar {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 14px 18px; margin-bottom: 18px;
+      font-size: .85rem; color: var(--ink2); display: flex; flex-wrap: wrap; gap: 8px 20px;
+    }
+    .summary-bar strong { color: var(--ink); }
   </style>
 </head>
 <body>
@@ -195,6 +212,7 @@
   <h1 class="page-title">Subscribe to Alerts</h1>
   <p class="page-sub">Fill in the form below to start receiving instant WhatsApp alerts.</p>
 
+  <!-- Progress indicator -->
   <div class="progress">
     <div class="prog-step active" id="ps1"><div class="prog-num">1</div><span>Details</span></div>
     <div class="prog-line" id="pl1"></div>
@@ -205,104 +223,133 @@
 
   <form id="form" novalidate>
 
-    <!-- Section 1: Personal info -->
-    <div class="card">
-      <div class="card-title"><span class="icon icon-orange">👤</span> Your Information</div>
-      <div class="field">
-        <label for="name">Full Name <span class="req">*</span></label>
-        <input type="text" id="name" placeholder="e.g. Ahmed Khan" required>
+    <!-- ── Step 1: Personal info + Plan ── -->
+    <div class="step-panel active" id="step1">
+      <div class="card">
+        <div class="card-title"><span class="icon icon-orange">👤</span> Your Information</div>
+        <div class="field">
+          <label for="name">Full Name <span class="req">*</span></label>
+          <input type="text" id="name" placeholder="e.g. Ahmed Khan" autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="wa">WhatsApp Number <span class="req">*</span></label>
+          <input type="tel" id="wa" placeholder="e.g. 0300-1234567" autocomplete="tel">
+          <div class="hint">Pakistani number. Alerts are sent here.</div>
+        </div>
       </div>
-      <div class="field">
-        <label for="wa">WhatsApp Number <span class="req">*</span></label>
-        <input type="tel" id="wa" placeholder="e.g. 0300-1234567" required>
-        <div class="hint">Pakistani number. Alerts are sent here.</div>
+
+      <div class="card">
+        <div class="card-title"><span class="icon icon-orange">💎</span> Choose Your Plan</div>
+        <div class="plan-chips">
+          <label class="plan-chip">
+            <input type="radio" name="plan" value="free">
+            <div class="plan-chip-inner">
+              <div class="plan-chip-name">Free Trial</div>
+              <div class="plan-chip-price">Rs. 0</div>
+              <div class="plan-chip-note">7 days · UK only</div>
+            </div>
+          </label>
+          <label class="plan-chip">
+            <input type="radio" name="plan" value="pro" checked>
+            <div class="plan-chip-inner">
+              <div class="plan-chip-name">Pro</div>
+              <div class="plan-chip-price">Rs. 1,500</div>
+              <div class="plan-chip-note">All routes · 1 min</div>
+            </div>
+          </label>
+          <label class="plan-chip">
+            <input type="radio" name="plan" value="vip">
+            <div class="plan-chip-inner">
+              <div class="plan-chip-name">VIP</div>
+              <div class="plan-chip-price">Rs. 3,000</div>
+              <div class="plan-chip-note">All routes · 30 sec</div>
+            </div>
+          </label>
+        </div>
       </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn-next" id="nextBtn1">Continue to Routes →</button>
+      </div>
+      <div class="err-banner" id="errBanner1"></div>
     </div>
 
-    <!-- Section 2: Plan -->
-    <div class="card">
-      <div class="card-title"><span class="icon icon-orange">💎</span> Choose Your Plan</div>
-      <div class="plan-chips">
-        <label class="plan-chip">
-          <input type="radio" name="plan" value="free">
-          <div class="plan-chip-inner">
-            <div class="plan-chip-name">Free Trial</div>
-            <div class="plan-chip-price">Rs. 0</div>
-            <div class="plan-chip-note">7 days · UK only</div>
+    <!-- ── Step 2: Routes + Cities + Duration ── -->
+    <div class="step-panel" id="step2">
+      <div class="card">
+        <div class="card-title"><span class="icon icon-green">🛂</span> Visa Routes <span style="font-size:.78rem;font-weight:400;color:var(--ink3)">(select all that apply)</span></div>
+        <div class="toggle-grid" id="routeGrid">
+          <label class="toggle"><input type="checkbox" name="routes" value="pak-gbr"><span class="toggle-label">🇬🇧 UK</span></label>
+          <label class="toggle"><input type="checkbox" name="routes" value="pak-ita"><span class="toggle-label">🇮🇹 Italy</span></label>
+          <label class="toggle"><input type="checkbox" name="routes" value="pak-fra"><span class="toggle-label">🇫🇷 France</span></label>
+          <label class="toggle"><input type="checkbox" name="routes" value="pak-deu"><span class="toggle-label">🇩🇪 Germany</span></label>
+          <label class="toggle"><input type="checkbox" name="routes" value="pak-can"><span class="toggle-label">🇨🇦 Canada</span></label>
+          <label class="toggle"><input type="checkbox" name="routes" value="pak-aus"><span class="toggle-label">🇦🇺 Australia</span></label>
+          <label class="toggle"><input type="checkbox" name="routes" value="pak-nld"><span class="toggle-label">🇳🇱 Netherlands</span></label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="icon icon-green">🏙️</span> VFS Centre Cities</div>
+        <div class="toggle-grid">
+          <label class="toggle"><input type="checkbox" name="cities" value="lahore"><span class="toggle-label">Lahore</span></label>
+          <label class="toggle"><input type="checkbox" name="cities" value="islamabad"><span class="toggle-label">Islamabad</span></label>
+          <label class="toggle"><input type="checkbox" name="cities" value="karachi"><span class="toggle-label">Karachi</span></label>
+        </div>
+      </div>
+
+      <div class="card" id="durCard">
+        <div class="card-title"><span class="icon icon-orange">📅</span> Subscription Duration</div>
+        <div class="dur-chips">
+          <label class="dur-chip"><input type="radio" name="months" value="1" checked><div class="dur-inner"><div class="dur-mo">1 Month</div><div class="dur-price" id="dp1">Rs. 1,500</div></div></label>
+          <label class="dur-chip"><input type="radio" name="months" value="3"><div class="dur-inner"><div class="dur-mo">3 Months</div><div class="dur-price" id="dp3">Rs. 4,000</div><div class="dur-save">Save Rs. 500</div></div></label>
+          <label class="dur-chip"><input type="radio" name="months" value="6"><div class="dur-inner"><div class="dur-mo">6 Months</div><div class="dur-price" id="dp6">Rs. 7,500</div><div class="dur-save">Save Rs. 1,500</div></div></label>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn-back" id="backBtn2">← Back</button>
+        <button type="button" class="btn-next" id="nextBtn2">Continue to Payment →</button>
+      </div>
+      <div class="err-banner" id="errBanner2"></div>
+    </div>
+
+    <!-- ── Step 3: Payment ── -->
+    <div class="step-panel" id="step3">
+      <!-- Summary of previous selections -->
+      <div class="summary-bar" id="summaryBar"></div>
+
+      <!-- Free trial: no payment needed -->
+      <div id="freeNotice" style="display:none;">
+        <div class="card">
+          <div class="card-title"><span class="icon icon-green">🎉</span> Free Trial — No Payment Needed</div>
+          <p style="color:var(--ink2);font-size:.92rem;">Your 7-day free trial for the UK route will be activated within 2 hours. Just submit to confirm your details.</p>
+        </div>
+      </div>
+
+      <!-- Paid plan: JazzCash payment -->
+      <div id="paySection">
+        <div class="card">
+          <div class="card-title"><span class="icon icon-orange">💳</span> JazzCash Payment</div>
+          <div class="jazzcash-box">
+            <div class="jc-label">Send this exact amount to</div>
+            <div class="jc-amount" id="jcAmount">Rs. 1,500</div>
+            <div class="jc-num">0331-862-7018</div>
+            <div class="jc-hint">JazzCash app → Send Money → enter number above</div>
           </div>
-        </label>
-        <label class="plan-chip">
-          <input type="radio" name="plan" value="pro" checked>
-          <div class="plan-chip-inner">
-            <div class="plan-chip-name">Pro</div>
-            <div class="plan-chip-price">Rs. 1,500</div>
-            <div class="plan-chip-note">All routes · 1 min</div>
+          <div class="field">
+            <label for="jcRef">JazzCash Transaction ID <span class="req">*</span></label>
+            <input type="text" id="jcRef" placeholder="e.g. T20261002123456" autocomplete="off">
+            <div class="hint">Found in JazzCash app → Transaction History. Starts with T followed by numbers.</div>
           </div>
-        </label>
-        <label class="plan-chip">
-          <input type="radio" name="plan" value="vip">
-          <div class="plan-chip-inner">
-            <div class="plan-chip-name">VIP</div>
-            <div class="plan-chip-price">Rs. 3,000</div>
-            <div class="plan-chip-note">All routes · 30 sec</div>
-          </div>
-        </label>
+        </div>
       </div>
-    </div>
 
-    <!-- Section 3: Routes -->
-    <div class="card">
-      <div class="card-title"><span class="icon icon-green">🛂</span> Visa Routes <span style="font-size:.78rem;font-weight:400;color:var(--ink3)">(select all that apply)</span></div>
-      <div class="toggle-grid" id="routeGrid">
-        <label class="toggle"><input type="checkbox" name="routes" value="pak-gbr"><span class="toggle-label">🇬🇧 UK</span></label>
-        <label class="toggle"><input type="checkbox" name="routes" value="pak-ita"><span class="toggle-label">🇮🇹 Italy</span></label>
-        <label class="toggle"><input type="checkbox" name="routes" value="pak-fra"><span class="toggle-label">🇫🇷 France</span></label>
-        <label class="toggle"><input type="checkbox" name="routes" value="pak-deu"><span class="toggle-label">🇩🇪 Germany</span></label>
-        <label class="toggle"><input type="checkbox" name="routes" value="pak-can"><span class="toggle-label">🇨🇦 Canada</span></label>
-        <label class="toggle"><input type="checkbox" name="routes" value="pak-aus"><span class="toggle-label">🇦🇺 Australia</span></label>
-        <label class="toggle"><input type="checkbox" name="routes" value="pak-nld"><span class="toggle-label">🇳🇱 Netherlands</span></label>
+      <div class="step-nav">
+        <button type="button" class="btn-back" id="backBtn3">← Back</button>
+        <button type="submit" class="btn-submit" id="submitBtn">Submit &amp; Activate →</button>
       </div>
-    </div>
-
-    <!-- Section 4: Cities -->
-    <div class="card">
-      <div class="card-title"><span class="icon icon-green">🏙️</span> VFS Centre Cities</div>
-      <div class="toggle-grid">
-        <label class="toggle"><input type="checkbox" name="cities" value="lahore"><span class="toggle-label">Lahore</span></label>
-        <label class="toggle"><input type="checkbox" name="cities" value="islamabad"><span class="toggle-label">Islamabad</span></label>
-        <label class="toggle"><input type="checkbox" name="cities" value="karachi"><span class="toggle-label">Karachi</span></label>
-      </div>
-    </div>
-
-    <!-- Section 5: Duration (hidden for free) -->
-    <div class="card" id="durCard">
-      <div class="card-title"><span class="icon icon-orange">📅</span> Subscription Duration</div>
-      <div class="dur-chips">
-        <label class="dur-chip"><input type="radio" name="months" value="1" checked><div class="dur-inner"><div class="dur-mo">1 Month</div><div class="dur-price" id="dp1">Rs. 1,500</div></div></label>
-        <label class="dur-chip"><input type="radio" name="months" value="3"><div class="dur-inner"><div class="dur-mo">3 Months</div><div class="dur-price" id="dp3">Rs. 4,000</div><div class="dur-save">Save Rs. 500</div></div></label>
-        <label class="dur-chip"><input type="radio" name="months" value="6"><div class="dur-inner"><div class="dur-mo">6 Months</div><div class="dur-price" id="dp6">Rs. 7,500</div><div class="dur-save">Save Rs. 1,500</div></div></label>
-      </div>
-    </div>
-
-    <!-- Section 6: Payment (hidden for free) -->
-    <div class="payment-card" id="payCard">
-      <div class="card-title"><span class="icon icon-orange">💳</span> JazzCash Payment</div>
-      <div class="jazzcash-box">
-        <div class="jc-label">Send this amount to</div>
-        <div class="jc-amount" id="jcAmount">Rs. 1,500</div>
-        <div class="jc-num">0331-862-7018</div>
-        <div class="jc-hint">JazzCash mobile wallet → Send Money</div>
-      </div>
-      <div class="field">
-        <label for="jcRef">JazzCash Transaction ID <span class="req">*</span></label>
-        <input type="text" id="jcRef" placeholder="e.g. T20261002123456">
-        <div class="hint">Found in JazzCash app under Transaction History.</div>
-      </div>
-    </div>
-
-    <div class="submit-area">
-      <button type="submit" class="btn-submit" id="submitBtn">Submit &amp; Activate Trial</button>
-      <div class="err-banner" id="errBanner"></div>
+      <div class="err-banner" id="errBanner3"></div>
       <p class="disclaimer">By subscribing you agree to our <a href="contact.html">Terms</a>. Activation within 2 hours of payment verification.</p>
     </div>
 
@@ -312,71 +359,112 @@
 <script>
   const WORKER_URL = 'https://vfs-alert-pk.YOUR_SUBDOMAIN.workers.dev';
   const PRICES = { free:{1:0,3:0,6:0}, pro:{1:1500,3:4000,6:7500}, vip:{1:3000,3:8000,6:15000} };
-  let plan = 'pro', months = 1;
+  let plan = 'pro', months = 1, currentStep = 1;
 
   function fmt(n) { return 'Rs. ' + n.toLocaleString(); }
 
-  function updateUI() {
-    const isFree = plan === 'free';
-    document.getElementById('durCard').style.display = isFree ? 'none' : 'block';
-    document.getElementById('payCard').className = 'payment-card' + (isFree ? '' : ' show');
+  function setStep(n) {
+    currentStep = n;
+    document.querySelectorAll('.step-panel').forEach((p,i) => p.classList.toggle('active', i+1 === n));
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function updateProgress() {
+    const s1=document.getElementById('ps1'), s2=document.getElementById('ps2'), s3=document.getElementById('ps3');
+    const l1=document.getElementById('pl1'), l2=document.getElementById('pl2');
+    if (currentStep === 1) {
+      s1.className='prog-step active'; l1.className='prog-line'; s2.className='prog-step'; l2.className='prog-line'; s3.className='prog-step';
+    } else if (currentStep === 2) {
+      s1.className='prog-step done'; l1.className='prog-line done'; s2.className='prog-step active'; l2.className='prog-line'; s3.className='prog-step';
+    } else {
+      s1.className='prog-step done'; l1.className='prog-line done'; s2.className='prog-step done'; l2.className='prog-line done'; s3.className='prog-step active';
+    }
+  }
+
+  function updatePrices() {
     const p = PRICES[plan] || PRICES.pro;
     document.getElementById('dp1').textContent = fmt(p[1]);
     document.getElementById('dp3').textContent = fmt(p[3]);
     document.getElementById('dp6').textContent = fmt(p[6]);
     document.getElementById('jcAmount').textContent = fmt(p[months]);
+    const isFree = plan === 'free';
+    document.getElementById('durCard').style.display = isFree ? 'none' : 'block';
+    document.getElementById('freeNotice').style.display = isFree ? 'block' : 'none';
+    document.getElementById('paySection').style.display = isFree ? 'none' : 'block';
     document.getElementById('submitBtn').textContent = isFree ? 'Start Free Trial →' : 'Submit Payment →';
-    // progress
-    const s1=document.getElementById('ps1'),s2=document.getElementById('ps2'),s3=document.getElementById('ps3');
-    const l1=document.getElementById('pl1'),l2=document.getElementById('pl2');
-    const name=document.getElementById('name').value.trim(), wa=document.getElementById('wa').value.trim();
-    if(name && wa) { s1.className='prog-step done'; l1.className='prog-line done'; s2.className='prog-step active'; }
-    else { s1.className='prog-step active'; l1.className='prog-line'; s2.className='prog-step'; }
-    const routes=[...document.querySelectorAll('input[name=routes]:checked')];
-    const cities=[...document.querySelectorAll('input[name=cities]:checked')];
-    if(name && wa && routes.length && cities.length) { s2.className='prog-step done'; l2.className='prog-line done'; s3.className='prog-step active'; }
-    else { l2.className='prog-line'; s3.className='prog-step'; }
   }
 
-  document.querySelectorAll('input[name=plan]').forEach(r => r.addEventListener('change', () => { plan = r.value; updateUI(); }));
-  document.querySelectorAll('input[name=months]').forEach(r => r.addEventListener('change', () => { months = parseInt(r.value); updateUI(); }));
-  document.getElementById('name').addEventListener('input', updateUI);
-  document.getElementById('wa').addEventListener('input', updateUI);
-  document.querySelectorAll('input[name=routes]').forEach(c => c.addEventListener('change', updateUI));
-  document.querySelectorAll('input[name=cities]').forEach(c => c.addEventListener('change', updateUI));
-
-  // Pre-select plan from URL
-  const pp = new URLSearchParams(location.search).get('plan');
-  if(['free','pro','vip'].includes(pp)) {
-    plan = pp;
-    const r = document.querySelector(`input[name=plan][value="${pp}"]`);
-    if(r) r.checked = true;
+  function buildSummary() {
+    const name = document.getElementById('name').value.trim();
+    const wa = document.getElementById('wa').value.trim();
+    const routes = [...document.querySelectorAll('input[name=routes]:checked')].map(x=>x.value);
+    const cities = [...document.querySelectorAll('input[name=cities]:checked')].map(x=>x.value);
+    const bar = document.getElementById('summaryBar');
+    bar.innerHTML = `
+      <span><strong>${name}</strong> · ${wa}</span>
+      <span>Plan: <strong>${plan.charAt(0).toUpperCase()+plan.slice(1)}</strong></span>
+      <span>Routes: <strong>${routes.length}</strong></span>
+      <span>Cities: <strong>${cities.join(', ')}</strong></span>
+      ${plan !== 'free' ? `<span>Duration: <strong>${months} month${months>1?'s':''}</strong></span>` : ''}
+    `;
   }
-  updateUI();
 
-  function isValidPK(n) { const d = n.replace(/\D/g,''); return /^(0?3\d{9}|923\d{9})$/.test(d); }
-
-  function showErr(msg) {
-    const b = document.getElementById('errBanner');
+  function showErr(bannerId, msg) {
+    const b = document.getElementById(bannerId);
     b.textContent = msg; b.className = 'err-banner show';
     b.scrollIntoView({ behavior:'smooth', block:'center' });
   }
+  function clearErr(bannerId) { document.getElementById(bannerId).className = 'err-banner'; }
 
+  function isValidPK(n) { const d = n.replace(/\D/g,''); return /^(0?3\d{9}|923\d{9})$/.test(d); }
+
+  // Step 1 → 2
+  document.getElementById('nextBtn1').addEventListener('click', () => {
+    clearErr('errBanner1');
+    const name = document.getElementById('name').value.trim();
+    const wa = document.getElementById('wa').value.trim();
+    if (!name) { document.getElementById('name').classList.add('err'); return showErr('errBanner1','Please enter your full name.'); }
+    document.getElementById('name').classList.remove('err');
+    if (!wa || !isValidPK(wa)) { document.getElementById('wa').classList.add('err'); return showErr('errBanner1','Please enter a valid Pakistani WhatsApp number (e.g. 0300-1234567).'); }
+    document.getElementById('wa').classList.remove('err');
+    setStep(2);
+  });
+
+  // Step 2 → 1
+  document.getElementById('backBtn2').addEventListener('click', () => setStep(1));
+
+  // Step 2 → 3
+  document.getElementById('nextBtn2').addEventListener('click', () => {
+    clearErr('errBanner2');
+    const routes = [...document.querySelectorAll('input[name=routes]:checked')];
+    const cities = [...document.querySelectorAll('input[name=cities]:checked')];
+    if (routes.length === 0) return showErr('errBanner2','Please select at least one visa route.');
+    if (cities.length === 0) return showErr('errBanner2','Please select at least one city.');
+    if (plan === 'free' && routes.length > 1) return showErr('errBanner2','Free plan supports one route only. Please select just one.');
+    updatePrices();
+    buildSummary();
+    setStep(3);
+  });
+
+  // Step 3 → 2
+  document.getElementById('backBtn3').addEventListener('click', () => setStep(2));
+
+  // Final submit
   document.getElementById('form').addEventListener('submit', async e => {
     e.preventDefault();
-    document.getElementById('errBanner').className = 'err-banner';
-    const name    = document.getElementById('name').value.trim();
-    const wa      = document.getElementById('wa').value.trim();
-    const jcRef   = document.getElementById('jcRef').value.trim();
-    const routes  = [...document.querySelectorAll('input[name=routes]:checked')].map(x=>x.value);
-    const cities  = [...document.querySelectorAll('input[name=cities]:checked')].map(x=>x.value);
+    clearErr('errBanner3');
+    const name   = document.getElementById('name').value.trim();
+    const wa     = document.getElementById('wa').value.trim();
+    const jcRef  = document.getElementById('jcRef').value.trim();
+    const routes = [...document.querySelectorAll('input[name=routes]:checked')].map(x=>x.value);
+    const cities = [...document.querySelectorAll('input[name=cities]:checked')].map(x=>x.value);
 
-    if (!name)                        return showErr('Please enter your full name.');
-    if (!wa || !isValidPK(wa))        return showErr('Please enter a valid Pakistani WhatsApp number (e.g. 0300-1234567).');
-    if (routes.length === 0)          return showErr('Please select at least one visa route.');
-    if (cities.length === 0)          return showErr('Please select at least one city.');
-    if (plan !== 'free' && !jcRef)    return showErr('Please enter your JazzCash transaction ID.');
-    if (plan === 'free' && routes.length > 1) return showErr('Free plan supports one route only. Please select just one.');
+    if (plan !== 'free' && !jcRef) {
+      document.getElementById('jcRef').classList.add('err');
+      return showErr('errBanner3','Please enter your JazzCash transaction ID.');
+    }
+    document.getElementById('jcRef').classList.remove('err');
 
     const btn = document.getElementById('submitBtn');
     btn.disabled = true; btn.textContent = 'Submitting…';
@@ -389,14 +477,27 @@
       if (data.success) {
         window.location.href = 'success.html?name=' + encodeURIComponent(name);
       } else {
-        showErr(data.message || 'Something went wrong. Please try again.');
+        showErr('errBanner3', data.message || 'Something went wrong. Please try again.');
         btn.disabled = false; btn.textContent = plan === 'free' ? 'Start Free Trial →' : 'Submit Payment →';
       }
     } catch {
-      showErr('Network error. Please check your connection and try again.');
+      showErr('errBanner3','Network error. Please check your connection and try again.');
       btn.disabled = false; btn.textContent = plan === 'free' ? 'Start Free Trial →' : 'Submit Payment →';
     }
   });
+
+  // Plan & duration listeners
+  document.querySelectorAll('input[name=plan]').forEach(r => r.addEventListener('change', () => { plan = r.value; updatePrices(); }));
+  document.querySelectorAll('input[name=months]').forEach(r => r.addEventListener('change', () => { months = parseInt(r.value); updatePrices(); }));
+
+  // Pre-select plan from URL
+  const pp = new URLSearchParams(location.search).get('plan');
+  if (['free','pro','vip'].includes(pp)) {
+    plan = pp;
+    const r = document.querySelector(`input[name=plan][value="${pp}"]`);
+    if (r) r.checked = true;
+  }
+  updatePrices();
 </script>
 </body>
 </html>
